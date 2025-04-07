@@ -30,11 +30,11 @@ Researched even more.  That posting came with pics.  Interestingly, the hardware
 
 The poster also has another one R640 posting.  This one has 6126 Xeon, which has higher clock rate but same number of cores 12.  Also has 128gb.  Only has 4tb hdd in total (4x1tb hdds).
 
-![FBm Post1](/assets/images/FBpost1.png "FBm Post1"){: width="250" }   ![FBm Post2](/assets/images/FBpost2.png "FBm Post2"){: width="250" }
+![FBm Post1](/assets/images/FBPost1.png "FBm Post1"){: width="250" }   ![FBm Post2](/assets/images/FBpost2.png "FBm Post2"){: width="250" }
 
 The service tag of the server was shown in the pics.
 
-![FBm Pic1](/assets/images/FBPic1.jpeg "FBm Pic1"){: width="550" }   
+![FBm Pic1](/assets/images/FBpic1.jpeg "FBm Pic1"){: width="550" }   
 ![FBm Pic2](/assets/images/FBpic2.jpeg "FBm Pic2"){: width="550" }
 ![FBm Pic3](/assets/images/FBpic3.jpeg "FBm Pic3"){: width="550" }
 ![FBm Pic4](/assets/images/FBpic4.jpeg "FBm Pic4"){: width="550" }
