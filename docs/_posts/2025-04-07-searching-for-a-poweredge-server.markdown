@@ -32,13 +32,19 @@ The poster also has another one R640 posting.  This one has 6126 Xeon, which has
 
 ![FBm Post1](/assets/images/FBPost1.png "FBm Post1"){: width="250" }   ![FBm Post2](/assets/images/FBpost2.png "FBm Post2"){: width="250" }
 
-The service tag of the server was shown in the pics.
 
-![FBm Pic1](/assets/images/FBpic1.jpeg "FBm Pic1"){: width="550" }   
+The service tag of the server was shown in the pics.  Here is the rest of the pics that were in the FBm post.
+
+![FBm Pic1](/assets/images/FBpic1.jpeg "FBm Pic1"){: width="550" }
+
 ![FBm Pic2](/assets/images/FBpic2.jpeg "FBm Pic2"){: width="550" }
+
 ![FBm Pic3](/assets/images/FBpic3.jpeg "FBm Pic3"){: width="550" }
+
 ![FBm Pic4](/assets/images/FBpic4.jpeg "FBm Pic4"){: width="550" }
+
 ![FBm Pic5](/assets/images/FBpic5.jpeg "FBm Pic5"){: width="550" }
+
 ![FBm Pic6](/assets/images/FBpic6.jpeg "FBm Pic6"){: width="550" }
 
 I looked up the service tag in Dell website.  It is a “OEMR XL R740”.  So, my presumption is getting more accurate.  Unless they posted the wrong pic.  It still has ProSupport but will end next month Jan 30 2025.
@@ -83,16 +89,22 @@ Tuesday Dec 10th.  He followed up in the morning around 9.  Got $500 from the AT
 
 Arrived at Youngsville Storage.  Parked.  Texted Chris that I’m there.  He came over to get me from the parking.  There was a gate and he had to open it.  We walked to the unit from the parking.  He showed me the unit.  It was already turned on and in BIOS screen.  I’ve been wondering if I will get to see it power up, and that was my dilemma, and now it’s resolved and all good!  
 
-I got it!  Chris was great.  It was a smooth transaction.  Thing was heavy maybe 55lbs.  I carried it to the parking lot with Chris helping open the gate and my 4runner's rear door.  Drove 26 miles back to home.
+I got it!  It is the same item that was in the pics, so I am pretty confident that this is a Poweredge R740!  Chris was great, btw.  It was a smooth transaction.  Thing was heavy maybe 55lbs.  I carried it to the parking lot with Chris helping open the gate and my 4runner's rear door.  Drove 26 miles back to home.
 
 Took it inside.  Took pics and sent those to my brother.  I remember back in the day when he used to bring home new hardware every time and I’ll just watch him install and use software on them enthusiastically.
 
-![At Home Pic1](/assets/images/AtHome1.jpeg "At Home Pic1"){: width="550" }   
+![At Home Pic1](/assets/images/AtHome1.jpeg "At Home Pic1"){: width="550" }
+
 ![At Home Pic2](/assets/images/AtHome2.jpeg "At Home Pic2"){: width="550" }
+
 ![At Home Pic3](/assets/images/AtHome3.jpeg "At Home Pic3"){: width="550" }
+
 ![At Home Pic4](/assets/images/AtHome4.jpeg "At Home Pic4"){: width="550" }
+
 ![At Home Pic5](/assets/images/AtHome5.jpeg "At Home Pic5"){: width="550" }
+
 ![At Home Pic6](/assets/images/AtHome6.jpeg "At Home Pic6"){: width="550" }
+
 ![At Home Pic7](/assets/images/AtHome7.jpeg "At Home Pic7"){: width="550" }
 
 Bought 2 power cables and a VGA cable from the nearest Walmart. $7.99 each cable. 
