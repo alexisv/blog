@@ -22,7 +22,8 @@ title: deephackmode.io
 email: alexisv@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   This blog site contains random articles about technology and other stuff.
-baseurl: "/blog" # the subpath of your site, e.g. /blog
+#baseurl: "/blog" # the subpath of your site, e.g. /blog
+baseurl: ""
 url: "http://blog.deephackmode.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: alexisv
 github_username:  alexisv
