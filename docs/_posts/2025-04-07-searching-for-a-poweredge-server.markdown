@@ -26,12 +26,10 @@ I started planning to install ESXi on it.  Explore ESXi and install TKGi and TKG
 
 Friday 12/6, I was off on lieu day for working the Sunday before.  I did a search again in FBm.  I found the postings for Dell R640 w/ the 2P 5118 Xeon, 128gb, 2x4tb hdd.  It's being sold for $500.
 
-![FBm Post](/assets/images/FBpost1.png "FBm Post"){: width="250" }
-![FBm Post](/assets/images/FBpost2.png "FBm Post"){: width="250" }
+![FBm Post1](/assets/images/FBpost1.png "FBm Post1"){: width="250" }
+![FBm Post2](/assets/images/FBpost2.png "FBm Post2"){: width="250" }
 
 Researched even more.  That posting came with pics.  Interestingly, the hardware captured in the photos doesn’t match the specs that was posted.  The pic’d hardware is in 2U form w/ 8x3.5 front drive bays.  The R640 comes in 1U form.  So I presume the server is actually a R740!  
-
-
 
 The poster also has another one R640 posting.  This one has 6126 Xeon, which has higher clock rate but same number of cores 12.  Also has 128gb.  Only has 4tb hdd in total (4x1tb hdds).
 
