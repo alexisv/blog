@@ -30,7 +30,7 @@ Click "Map Device":
 Click "Boot" from the top row, and then click "Virtual CD/DVD/ISO":
 ![Mapping the Virtual Media](/assets/images/2025-04-10-installing-esxi/image-05.png "Mapping the Virtual Media"){: width="1024" }
 
-The server will boot up and will switch screens a few times as such:
+Click "Power" from the top row, and then click "Power On System".  The server will boot up and will switch screens a few times as such:
 ![Dell starting up](/assets/images/2025-04-10-installing-esxi/image-06.png "Dell starting up"){: width="1024" }
 
 ![Loading ESXi installer 1](/assets/images/2025-04-10-installing-esxi/image-07.png "Loading ESXi installer 1"){: width="1024" }
