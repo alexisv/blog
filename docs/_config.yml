@@ -26,7 +26,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: ""
 url: "http://blog.deephackmode.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: alexisv
-github_username:  alexisv
+github_username:  p-alexisv
 linkedin_username: alexisvillalon
 
 # Build settings
