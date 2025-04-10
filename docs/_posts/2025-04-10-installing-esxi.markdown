@@ -5,13 +5,15 @@ date:   2025-04-10 17:53:00 -0400
 categories: deephackmode.io update
 ---
 
-I have downloaded the ESXi installer from the Broadcom download portal.  I chose to download the custom ISO for Dell.
+I have downloaded the ESXi installer from the Broadcom download portal.  I chose to download the custom ISO file for Dell.  The file name was:
 
-The installation was straightforward.  It didn't take a lot time too.
+```VMware-VMvisor-Installer-8.0.0.update03-24414501.x86_64-Dell_Customized-A03.iso```
 
-The following are the series of steps and the screens I captured as the installation progressed to completion.  I used iDRAC's Virtual Console to see the main console of the server and to mount the ISO file as a virtual DVD.
+The installation was straightforward.  It didn't take a lot of time too.
 
-While the server was powered off, I mounted the ISO file as a Virtual DVD.
+The following is the series of steps and the screens that I captured as the installation progressed to completion.  I used iDRAC's Virtual Console to see the main console of the server and to mount the ISO file as a virtual DVD.
+
+While the server was powered off, I mounted the ISO file as a virtual DVD.
 
 Click Virtual Media from the top row:
 ![System powered off](/assets/images/2025-04-10-installing-esxi/image-01.png "System powered off"){: width="1024" }
@@ -25,17 +27,17 @@ Find and open the installer ISO file:
 Click "Map Device":
 ![Mapping the Virtual Media](/assets/images/2025-04-10-installing-esxi/image-04.png "Mapping the Virtual Media"){: width="1024" }
 
-Click "Boot" from the top row and click "Virtual CD/DVD/ISO":
+Click "Boot" from the top row, and then click "Virtual CD/DVD/ISO":
 ![Mapping the Virtual Media](/assets/images/2025-04-10-installing-esxi/image-05.png "Mapping the Virtual Media"){: width="1024" }
 
-The server will boot up and will switch screens a few times such as the following:
+The server will boot up and will switch screens a few times as such:
 ![Dell starting up](/assets/images/2025-04-10-installing-esxi/image-06.png "Dell starting up"){: width="1024" }
 
 ![Loading ESXi installer 1](/assets/images/2025-04-10-installing-esxi/image-07.png "Loading ESXi installer 1"){: width="1024" }
 
 ![Loading ESXi installer 2](/assets/images/2025-04-10-installing-esxi/image-08.png "Loading ESXi installer 2"){: width="1024" }
 
-Welcome to the VMware ESXi 8.0.3 Installation!  Just press Enter.
+Welcome to the VMware ESXi 8.0.3 Installation!  Just press Enter at this screen.
 ![Welcome to the installation](/assets/images/2025-04-10-installing-esxi/image-09.png "Welcome to the installation"){: width="1024" }
 
 Press F11 to accept the EULA and continue.
@@ -74,10 +76,10 @@ Press Enter to reboot.
 This is what the console looks like when the boot up has completed.
 ![ESXi ready](/assets/images/2025-04-10-installing-esxi/image-25.png "ESXi ready"){: width="1024" }
 
-To manage, log on to the ESXi Host Client.
+To manage the host, log on to the ESXi Host Client using your browser.
 ![ESXi client ready](/assets/images/2025-04-10-installing-esxi/image-26.png "ESXi client ready"){: width="1024" }
 
-Enter the "root" username and its password.  You'll be greeted by this screen.
+Log on with the "root" username and its password.  You'll be greeted by this screen.
 ![ESXi client ready](/assets/images/2025-04-10-installing-esxi/image-27.png "ESXi client ready"){: width="1024" }
 
 Congratulations!  Your ESXi host is now up and running!
