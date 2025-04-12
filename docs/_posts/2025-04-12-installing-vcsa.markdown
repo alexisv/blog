@@ -22,7 +22,7 @@ The following is the series of steps and the screens that I captured as the inst
 Using the File Explorer, find the ISO file and then right-click on it and click "Mount":
 ![Mount the ISO file](/assets/images/2025-04-12-installing-vcsa/dvd-1-mount.png "Mount the ISO file"){: width="1024" }
 
-Click the DVD drive to view its contents.  Double-click to pen the `vcsa-ui-installer` folder.
+Click the DVD drive to view its contents.  Double-click to open the `vcsa-ui-installer` folder.
 ![DVD contents](/assets/images/2025-04-12-installing-vcsa/dvd-2-contents.png "DVD contents"){: width="1024" }
 
 Double-click the `installer` file to launch it.
