@@ -7,7 +7,9 @@ categories: deephackmode.io update
 
 I have downloaded the ESXi installer from the Broadcom download portal.  I chose to download the custom ISO file for Dell.  The file name was:
 
-```VMware-VMvisor-Installer-8.0.0.update03-24414501.x86_64-Dell_Customized-A03.iso```
+```
+VMware-VMvisor-Installer-8.0.0.update03-24414501.x86_64-Dell_Customized-A03.iso
+```
 
 The installation was straightforward.  It didn't take a lot of time too.
 
@@ -82,4 +84,34 @@ To manage the host, log on to the ESXi Host Client using your browser.
 Log on with the "root" username and its password.  You'll be greeted by this screen.
 ![ESXi client ready](/assets/images/2025-04-10-installing-esxi/image-27.png "ESXi client ready"){: width="1024" }
 
-Congratulations!  Your ESXi host is now up and running!
+Switch to the console to customize the Management Network settings.  Press F2, and log in with the root account and password.
+![Customize System](/assets/images/2025-04-10-installing-esxi/esxi-customize-log-in.png "Customize System"){: width="1024" }
+
+Select "Configure Management Network".
+![Configure Management Network](/assets/images/2025-04-10-installing-esxi/esxi-system-customization.png "Configure Management Network"){: width="1024" }
+
+Set a static IP and gateway.
+![IPV4 Configuration](/assets/images/2025-04-10-installing-esxi/esxi-network-configuration.png "IPV4 Configuration"){: width="1024" }
+
+Configure DNS.
+![DNS Configuration](/assets/images/2025-04-10-installing-esxi/esxi-dns-configuration.png "DNS Configuration"){: width="1024" }
+
+Configure DNS Suffixes.
+![DNS Suffixes](/assets/images/2025-04-10-installing-esxi/esxi-dns-suffixes.png "DNS Suffixes"){: width="1024" }
+
+Save your changes.
+![Confirm settings](/assets/images/2025-04-10-installing-esxi/esxi-confirm-management-network-settings.png "Confirm settings"){: width="1024" }
+
+Test settings.
+![Test settings](/assets/images/2025-04-10-installing-esxi/esxi-test-management-network.png "Test settings"){: width="1024" }
+
+Make sure the test results are all OK!
+![Test results](/assets/images/2025-04-10-installing-esxi/esxi-test-network-results.png "Test results"){: width="1024" }
+
+Switch to the ESXi Web UI, and configure Time settings.  Click "Host->Manage", and then click "System->Time & date".
+![Time settings](/assets/images/2025-04-10-installing-esxi/esxi-time-settings.png "Time settings"){: width="1024" }
+
+Assign a valid license for the ESXi product.
+![x](/assets/images/2025-04-10-installing-esxi/esxi-assign-license.png "y"){: width="1024" }
+
+**Congratulations!  Your ESXi host is now up and running!**
