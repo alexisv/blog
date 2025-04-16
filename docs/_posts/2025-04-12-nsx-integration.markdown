@@ -65,7 +65,6 @@ The NSX manager VM is deployed through VC's Deploy OVF Template wizard.
     | IP protocol | IPv4 |
     | Hostname | nsx-mgr-1.deephackmode.io |
     | Rolename | NSX Manager |
-    | NSX Site Name	| Site-1 |
     | Default IPv4 Gateway | 192.168.86.34 |
     | Management Network IPv4 Address | 192.168.86.251 |
     | Management Network Netmask | 255.255.255.0 |
@@ -92,7 +91,7 @@ You can use an existing VDS or configure a new one. If you use an exising VDS, y
 1. Follow the prompts and provide the following information.
 
     | Name | VDS-NSX |
-    | Location | DC1 |
+    | Location | Datacenter |
     | Spefify a distributed switch version | Select the version for your vSphere environment. |
     | Number of uplinks | 1 |
     | Network I/O Control | Enabled |
@@ -158,8 +157,6 @@ You can use an existing VDS or configure a new one. If you use an exising VDS, y
 
 
 ### Step 4: Deploy NSX Edge Nodes and Create an Edge Cluster {#step-4}
-
-I will create two Edge Nodes.
 
 #### Create two segments for each Edge TEP network
 1. In NSX Manager, go to Networking->Segments.
@@ -260,7 +257,6 @@ I will create two Edge Nodes.
     ![Edge-2](/assets/images/2025-04-12-nsx-integration/edge-2.png "Edge-2"){: .popup-img }{: width="512" }
 
 1. Wait until the Configuration State column displays Success
-
 
 #### Create an Edge Cluster
 1. In NSX Manager, go to System->Fabric->Nodes->Edge Clusters.
