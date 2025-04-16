@@ -4,6 +4,7 @@ title:  "NSX Integration"
 date:   2025-04-12 11:54:00 -0400
 categories: deephackmode.io update
 ---
+{% include image-popup.html %}
 
 At this point, I now have a functioning vSphere environment.  Key components of vSphere include the ESXi hypervisor and vCenter Server.  Both of which are now up & running in my Homelab that has only one Dell PowerEdge R740 server, a tiny TP-Link 5-Port Gigabit switch, and a Raspberry PI.  The switch is connected to my main switch and to the NIC ports of the R740.  The Raspberry PI functions as a router, DNS, NTP and VPN server.
 
@@ -15,9 +16,11 @@ I have downloaded the NSX Unified Appliance OVA.
 nsx-unified-appliance-4.2.1.3.0.24533887.ova
 ```
 
-I followed the official [NSX Quickstart guide](https://techdocs.broadcom.com/us/en/vmware-cis/nsx/vmware-nsx/4-2/quick-start-guide/installing-nsx-t.html) to install it.
+I followed the official [NSX Quickstart guide](https://techdocs.broadcom.com/us/en/vmware-cis/nsx/vmware-nsx/4-2/quick-start-guide/installing-nsx-t.html){:target="_blank"} to install it.
 
-To prepare for the installation, I filled out this table to pre-plan for the network settings.
+The NSX Policy API is the default mode, and that is fine and I won't change it to Manager mode.  Later on, I will create the objects using Policy API and so I will use Policy API when I install the TKGI tile.
+
+To prepare for the installation, I filled out this table with the planned network settings.
 
 | **Setting** | **Notes** | **Your Value** |
 | --- | --- | --- |
@@ -29,11 +32,7 @@ To prepare for the installation, I filled out this table to pre-plan for the net
 | TEP (tunnel endpoint) subnet | 192.168.20.0/24, default gateway: 192.168.20.1, subnet mask: 255.255.255.0 | 192.168.20.0/24, default gateway: 192.168.20.1, subnet mask: 255.255.255.0 |
 | VC IP address | 192.168.10.10 (VLAN 11) | 192.168.86.101 (VLAN 11) |
 | ESXi-1 IP address | 192.168.10.11 (VLAN 11), 192.168.20.11 (VLAN 12) | 192.168.86.23 (VLAN 11), 192.168.20.11 (VLAN 12) |
-| ESXi-2 IP address | 192.168.10.12 (VLAN 11), 192.168.20.12 (VLAN 12) | N/A |
-| ESXi-3 IP address | 192.168.10.13 (VLAN 11), 192.168.20.13 (VLAN 12) | N/A |
 | NSX-mgr-1 IP address | 192.168.10.14 (VLAN 11) | 192.168.86.251 (VLAN 11) |
-| NSX-mgr-2 IP address | 192.168.10.15 (VLAN 11) | N/A |
-| NSX-mgr-3 IP address | 192.168.10.16 (VLAN 11) | N/A |
 | Edge-1 IP address | 192.168.10.17 (VLAN 11), 192.168.20.17 (VLAN 12) | 192.168.86.252 (VLAN 11), 192.168.20.17 (VLAN 12) |
 | Edge-2 IP address | 192.168.10.18 (VLAN 11), 192.168.20.18 (VLAN 12) | 192.168.86.253 (VLAN 11), 192.168.20.18 (VLAN 12) |
 | Physical router's downlink IP address | 192.168.50.1 (VLAN 50) | 192.168.50.1 (VLAN 50) |
@@ -46,7 +45,6 @@ To prepare for the installation, I filled out this table to pre-plan for the net
 | Test-VM-1 IP address | 10.1.1.11 | 10.1.1.11 |
 | Test-VM-2 IP address | 10.1.2.11 | 10.1.2.11 |
 | Test-VM-3 IP address | 10.2.1.11 | 10.2.1.11 |
-
 
 ### Step 1: Deploy the NSX Manager {#step-1}
 
@@ -68,7 +66,7 @@ The NSX manager VM is deployed through VC's Deploy OVF Template wizard.
     | Hostname | nsx-mgr-1.deephackmode.io |
     | Rolename | NSX Manager |
     | NSX Site Name	| Site-1 |
-    | Default IPv4 Gateway | 192.168.86.1 |
+    | Default IPv4 Gateway | 192.168.86.34 |
     | Management Network IPv4 Address | 192.168.86.251 |
     | Management Network Netmask | 255.255.255.0 |
     | DNS Server list | 192.168.86.34 |
@@ -82,7 +80,8 @@ The NSX manager VM is deployed through VC's Deploy OVF Template wizard.
 1. Click Add at the warning Thumbprint is Missing.
 1. Wait until Registration Status is Registered. You can click Refresh to refresh the status.
 
-    ![Compute Manager](/assets/images/2025-04-12-nsx-integration/compute-manager.png "Compute Manager"){: width="1024" }
+    ![Compute Manager](/assets/images/2025-04-12-nsx-integration/compute-manager.png "Compute Manager"){: .popup-img }{: width="1024" }
+
 
 ### Step 2: Configure a VDS {#step-2}
 
@@ -155,7 +154,8 @@ You can use an existing VDS or configure a new one. If you use an exising VDS, y
 1. Click "Configure NSX" from the menu above the table.
 1. Select "tn-profile" as the Transport Node Profile, then click Save.
 1. Wait until the NSX Configuration column displays Success. You can click the Refresh button to refresh the window.
-    ![Host Transport Nodes](/assets/images/2025-04-12-nsx-integration/host-transport-nodes.png "Host Transport Nodes"){: width="1024" }
+    ![Host Transport Nodes](/assets/images/2025-04-12-nsx-integration/host-transport-nodes.png "Host Transport Nodes"){: .popup-img }{: width="1024" }
+
 
 ### Step 4: Deploy NSX Edge Nodes and Create an Edge Cluster {#step-4}
 
@@ -170,7 +170,7 @@ I will create two Edge Nodes.
 1. Set VLAN to "0-4094"
 1. Click Save to save the segment.
 1. Repeat the steps to add another segment with name of "Edge-uplink-2".
-    ![Segments](/assets/images/2025-04-12-nsx-integration/segments.png "Segments"){: width="1024" }
+    ![Segments](/assets/images/2025-04-12-nsx-integration/segments.png "Segments"){: .popup-img }{: width="1024" }
 
 #### Create an IP Pool for the Edge TEP network
 1. In NSX Manager, go to Networking->IP Address Pools.
@@ -191,7 +191,7 @@ I will create two Edge Nodes.
 1. In the Name field, enter Edge-uplink-1.
 1. Under Teamings, select Default Teaming and enter uplink1 for Active Uplinks.
 1. In the Transport VLAN field, enter 12.
-    ![Edge Uplink Profiles](/assets/images/2025-04-12-nsx-integration/edge-uplink-profiles.png "Edge Uplink Profiles"){: width="1024" }
+    ![Edge Uplink Profiles](/assets/images/2025-04-12-nsx-integration/edge-uplink-profiles.png "Edge Uplink Profiles"){: .popup-img }{: width="1024" }
 
 #### Deploy NSX Edge Nodes
 1. In NSX Manager, go to System->Fabric->Nodes->Edge Transport Nodes.
@@ -223,9 +223,9 @@ I will create two Edge Nodes.
     | Uplink Profile | Edge-uplink-1
     | IP Assignment | Use IP Pool
     | IP Pool |	edge-tep-pool
-    | DPDK Fastpath Interfaces	Click Select Interface and select the VLAN Segment "Edge-uplink-1"
+    | DPDK Fastpath Interfaces | Click Select Interface and select the VLAN Segment "Edge-uplink-1"
 
-    ![Edge-1](/assets/images/2025-04-12-nsx-integration/edge-1.png "Edge-1"){: width="1024" }
+    ![Edge-1](/assets/images/2025-04-12-nsx-integration/edge-1.png "Edge-1"){: .popup-img }{: width="512" }
 
 1. Wait until the Configuration State column displays Success. You can click the Refresh button to refresh the window.
 1. Repeat steps 2-4 to deploy Edge-2, using the following information.  
@@ -255,17 +255,17 @@ I will create two Edge Nodes.
    | Uplink Profile | Edge-uplink-2
    | IP Assignment | Use IP Pool
    | IP Pool |	edge-tep-pool
-   | DPDK Fastpath Interfaces	Click Select Interface and select the VLAN Segment "Edge-uplink-2"
+   | DPDK Fastpath Interfaces | Click Select Interface and select the VLAN Segment "Edge-uplink-2"
 
-    ![Edge-2](/assets/images/2025-04-12-nsx-integration/edge-2.png "Edge-2"){: width="1024" }
+    ![Edge-2](/assets/images/2025-04-12-nsx-integration/edge-2.png "Edge-2"){: .popup-img }{: width="512" }
 
 1. Wait until the Configuration State column displays Success
 
 
 #### Create an Edge Cluster
-1. In NSX Manager, go to SystemFabricNodesEdge Clusters.
+1. In NSX Manager, go to System->Fabric->Nodes->Edge Clusters.
 1. Click Add Edge Cluster.
-1. In the Name field, enter Edge-cluster-1.
+1. In the Name field, enter "Edge-cluster-1".
 1. Move Edge-1 and Edge-2 from the Available window to the Selected window.
 1. Click Add.
 
@@ -303,9 +303,9 @@ I will create two Edge Nodes.
 1. Save the changes.
 1. Configure Routing on the Physical Router and Tier-0 Gateway
 1. On the physical router, configure a static route to the subnets 10.1.1.0/24, 10.1.2.0/24, and 10.2.1.0/24 via 192.168.50.13, which is the virtual IP address of the tier-0 gateway's external interface.
-1. In NSX Manager, go to NetworkingTier-0 Gateways.
+1. In NSX Manager, go to Networking->Tier-0 Gateways.
 1. Edit T0-gateway-1.
-1. Under RoutingStatic Routes, click Set and click Add Static Route.
+1. Under Routing->Static Routes, click Set and click Add Static Route.
 1. In the Name field, enter default.
 1. In the Network field, enter 0.0.0.0/0.
 1. Click Set Next Hops.
@@ -340,7 +340,8 @@ I will create two Edge Nodes.
 1. Verify that LS1.1, LS1.2, and LS2.1 are created under the appropriate VDS in VC.
 
 At this point, check the Edge nodes at Fabric->Nodes->Edge Transport Nodes.  The nodes should have at least 2 tunnels showing up (green).
-![Edge Transport Nodes](/assets/images/2025-04-12-nsx-integration/edge-transport-nodes.png "Edge Transport Nodes"){: width="1024" }
+![Edge Transport Nodes](/assets/images/2025-04-12-nsx-integration/edge-transport-nodes.png "Edge Transport Nodes"){: .popup-img }{: width="1024" }
+
 
 ### Step 6: Test East-West and North-South Connectivity {#step-6}
 1. Deploy a test VM in each of the 3 segments.
