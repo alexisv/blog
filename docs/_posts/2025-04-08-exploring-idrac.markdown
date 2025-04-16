@@ -4,6 +4,8 @@ title:  "Exploring iDRAC"
 date:   2025-04-08 14:41:00 -0400
 categories: deephackmode.io update
 ---
+{% include image-popup.html %}
+
 The server has been powered on and was booting up.  I entered BIOS System setup.  All specs details are there and they align with what I know that the system has. 
 
 Noticed that it is really debranded. No mention of Dell or PowerEdge.  
@@ -22,7 +24,7 @@ I connected the network cable into the iDRAC dedicated NIC.  It got an IP addres
 
 So, I tried “root” and “calvin”, and I got in!
 
-![iDRAC screen](/assets/images/2025-04-08-exploring-idrac/idrac1.png "iDRAC screen"){: width="550" }
+![iDRAC screen](/assets/images/2025-04-08-exploring-idrac/idrac1.png "iDRAC screen"){: width="550" }{: .popup-img }
 
 Who is Calvin, btw?
 
@@ -32,20 +34,20 @@ I think that iDRAC is a great tool because it allows me to access the server rem
 
 I clicked “Virtual Media” from the top menu of the Virtual Console, and clicked “Connect Virtual Media”
 
-![Virtual media 1](/assets/images/2025-04-08-exploring-idrac/virtual-media1.png "Virtual media 1"){: width="550" }
+![Virtual media 1](/assets/images/2025-04-08-exploring-idrac/virtual-media1.png "Virtual media 1"){: width="550" }{: .popup-img }
 
-![Virtual media 2](/assets/images/2025-04-08-exploring-idrac/virtual-media2.png "Virtual media 2"){: width="550" }
+![Virtual media 2](/assets/images/2025-04-08-exploring-idrac/virtual-media2.png "Virtual media 2"){: width="550" }{: .popup-img }
 
 Earlier, I have downloaded the ESXi ISO for Dell from the Broadcom download page.
 
 Chose the ISO that I downloaded.
 
-![Virtual media 3](/assets/images/2025-04-08-exploring-idrac/virtual-media3.png "Virtual media 3"){: width="550" }
+![Virtual media 3](/assets/images/2025-04-08-exploring-idrac/virtual-media3.png "Virtual media 3"){: width="550" }{: .popup-img }
 
 Clicked “Map Device”.
 
 Then, boot the Virtual CD/DVD/ISO.
 
-![Boot Options page](/assets/images/2025-04-08-exploring-idrac/boot-options.png "Boot Options page"){: width="550" }
+![Boot Options page](/assets/images/2025-04-08-exploring-idrac/boot-options.png "Boot Options page"){: width="550" }{: .popup-img }
 
 Next up, ESXi installation.

@@ -4,6 +4,8 @@ title:  "Searching for a Poweredge server"
 date:   2025-04-07 17:48:00 -0400
 categories: deephackmode.io update
 ---
+{% include image-popup.html %}
+
 It was around Black Friday 2024 when I was searching the Dell website for deals.  I wasn't sure what to get for myself and so I thought why not check out servers used for ESXi hosts.  That’s how I came across the “Poweredge” servers.  They are expensive though, like in the thousands of dollars.
 
 I searched in the FB marketplace for a “Poweredge”.  Found one being sold by a guy in Cary NC.  Poweredge R720 for $200.  2 cpus, with 128gb ram but no hard drives!  
@@ -30,28 +32,28 @@ Researched even more.  That posting came with pics.  Interestingly, the hardware
 
 The poster also has another one R640 posting.  This one has 6126 Xeon, which has higher clock rate but same number of cores 12.  Also has 128gb.  Only has 4tb hdd in total (4x1tb hdds).
 
-![FBm Post1](/assets/images/FBPost1.png "FBm Post1"){: width="250" }   ![FBm Post2](/assets/images/FBpost2.png "FBm Post2"){: width="250" }
+![FBm Post1](/assets/images/FBPost1.png "FBm Post1"){: width="250" }{: .popup-img }   ![FBm Post2](/assets/images/FBpost2.png "FBm Post2"){: width="250" }{: .popup-img }
 
 
 The service tag of the server was shown in the pics.  Here is the rest of the pics that were in the FBm post.
 
-![FBm Pic1](/assets/images/FBpic1.jpeg "FBm Pic1"){: width="550" }
+![FBm Pic1](/assets/images/FBpic1.jpeg "FBm Pic1"){: width="550" }{: .popup-img }
 
-![FBm Pic2](/assets/images/FBpic2.jpeg "FBm Pic2"){: width="550" }
+![FBm Pic2](/assets/images/FBpic2.jpeg "FBm Pic2"){: width="550" }{: .popup-img }
 
-![FBm Pic3](/assets/images/FBpic3.jpeg "FBm Pic3"){: width="550" }
+![FBm Pic3](/assets/images/FBpic3.jpeg "FBm Pic3"){: width="550" }{: .popup-img }
 
-![FBm Pic4](/assets/images/FBpic4.jpeg "FBm Pic4"){: width="550" }
+![FBm Pic4](/assets/images/FBpic4.jpeg "FBm Pic4"){: width="550" }{: .popup-img }
 
-![FBm Pic5](/assets/images/FBpic5.jpeg "FBm Pic5"){: width="550" }
+![FBm Pic5](/assets/images/FBpic5.jpeg "FBm Pic5"){: width="550" }{: .popup-img }
 
-![FBm Pic6](/assets/images/FBpic6.jpeg "FBm Pic6"){: width="550" }
+![FBm Pic6](/assets/images/FBpic6.jpeg "FBm Pic6"){: width="550" }{: .popup-img }
 
 I looked up the service tag in Dell website.  It is a “OEMR XL R740”.  So, my presumption is getting more accurate.  Unless they posted the wrong pic.  It still has ProSupport but will end next month Jan 30 2025.
 
 [Dell OEMR page](https://www.dell.com/support/home/en-us/product-support/servicetag/0-eGhnQ1YvcmplRzdMKzNNMTNDS0ZSZz090/overview)
 
-![Dell page](/assets/images/Dell-OEMR.png "Dell-OEMR"){: width="640" }
+![Dell page](/assets/images/Dell-OEMR.png "Dell-OEMR"){: width="640" }{: .popup-img }
 
 This really sounds like a great deal!
 
@@ -93,19 +95,19 @@ I got it!  It is the same item that was in the pics, so I am pretty confident th
 
 Took it inside.  Took pics and sent those to my brother.  I remember back in the day when he used to bring home new hardware every time and I’ll just watch him install and use software on them enthusiastically.
 
-![At Home Pic1](/assets/images/AtHome1.jpeg "At Home Pic1"){: width="550" }
+![At Home Pic1](/assets/images/AtHome1.jpeg "At Home Pic1"){: width="550" }{: .popup-img }
 
-![At Home Pic2](/assets/images/AtHome2.jpeg "At Home Pic2"){: width="550" }
+![At Home Pic2](/assets/images/AtHome2.jpeg "At Home Pic2"){: width="550" }{: .popup-img }
 
-![At Home Pic3](/assets/images/AtHome3.jpeg "At Home Pic3"){: width="550" }
+![At Home Pic3](/assets/images/AtHome3.jpeg "At Home Pic3"){: width="550" }{: .popup-img }
 
-![At Home Pic4](/assets/images/AtHome4.jpeg "At Home Pic4"){: width="550" }
+![At Home Pic4](/assets/images/AtHome4.jpeg "At Home Pic4"){: width="550" }{: .popup-img }
 
-![At Home Pic5](/assets/images/AtHome5.jpeg "At Home Pic5"){: width="550" }
+![At Home Pic5](/assets/images/AtHome5.jpeg "At Home Pic5"){: width="550" }{: .popup-img }
 
-![At Home Pic6](/assets/images/AtHome6.jpeg "At Home Pic6"){: width="550" }
+![At Home Pic6](/assets/images/AtHome6.jpeg "At Home Pic6"){: width="550" }{: .popup-img }
 
-![At Home Pic7](/assets/images/AtHome7.jpeg "At Home Pic7"){: width="550" }
+![At Home Pic7](/assets/images/AtHome7.jpeg "At Home Pic7"){: width="550" }{: .popup-img }
 
 Bought 2 power cables and a VGA cable from the nearest Walmart. $7.99 each cable. 
 
@@ -115,6 +117,6 @@ Connected the VGA cable, power cables, and usb mouse & keyboard too.  Then, stru
 
 Powered it on.  
 
-![Dell booting up](/assets/images/Dell-booting.png "Dell booting up"){: width="550" }
+![Dell booting up](/assets/images/Dell-booting.png "Dell booting up"){: width="550" }{: .popup-img }
 
 It's running!
