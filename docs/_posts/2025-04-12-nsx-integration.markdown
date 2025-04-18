@@ -73,7 +73,11 @@ The NSX manager VM is deployed through VC's Deploy OVF Template wizard.
 
 1. Wait for the deployment to finish. The Recent Tasks panel at the bottom of the vSphere Client window will indicate when the task is complete.
 1. Power on the NSX Manager VM.
-1. Log in to NSX-mgr-1 at https://nsx-mgr-1.deephackmode.io.  Set up the DNS entry beforehand.
+1. Set up the DNS record for the NSX Hostname.
+1. Log in to NSX-mgr-1 at `https://nsx-mgr-1.deephackmode.io`.  
+
+    ![NSX Tour](/assets/images/2025-04-12-nsx-integration/welcome-to-nsx.png "NSX Tour"){: .popup-img }{: width="398" }
+
 1. Go to System->Licenses and click Add to add your NSX license.
 1. Go to System->Fabric->Compute Managers and click Add to add the VC as a compute manager. Follow the prompts and provide the necessary information about the vCenter.
 1. Click Add at the warning Thumbprint is Missing.
