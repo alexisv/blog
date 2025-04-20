@@ -4,8 +4,6 @@ title:  "NSX Integration"
 date:   2025-04-12 11:54:00 -0400
 categories: deephackmode.io update
 ---
-{% include image-popup.html %}
-
 At this point, I now have a functioning vSphere environment.  Key components of vSphere include the ESXi hypervisor and vCenter Server.  Both of which are now up & running in my Homelab that has only one Dell PowerEdge R740 server, a tiny TP-Link 5-Port Gigabit switch, and a Raspberry PI.  The switch is connected to my main switch and to the NIC ports of the R740.  The Raspberry PI functions as a router, DNS, NTP and VPN server.
 
 I am now going to deploy a NSX Manager and two Edge Node VM's in my Homelab.

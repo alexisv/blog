@@ -4,8 +4,6 @@ title:  "Installing ESXi"
 date:   2025-04-10 17:53:00 -0400
 categories: deephackmode.io update
 ---
-{% include image-popup.html %}
-
 I have downloaded the ESXi installer from the Broadcom download portal.  I chose to download the custom ISO file for Dell.  The file name was:
 
 ```

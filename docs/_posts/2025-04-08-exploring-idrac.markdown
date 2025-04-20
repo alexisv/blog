@@ -4,8 +4,6 @@ title:  "Exploring iDRAC"
 date:   2025-04-08 14:41:00 -0400
 categories: deephackmode.io update
 ---
-{% include image-popup.html %}
-
 The server has been powered on and was booting up.  I entered BIOS System setup.  All specs details are there and they align with what I know that the system has. 
 
 Noticed that it is really debranded. No mention of Dell or PowerEdge.  

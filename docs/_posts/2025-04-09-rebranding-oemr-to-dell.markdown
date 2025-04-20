@@ -4,8 +4,6 @@ title:  "Rebranding OEMR to Dell"
 date:   2025-04-09 17:48:00 -0400
 categories: deephackmode.io update
 ---
-{% include image-popup.html %}
-
 So, remember that I mentioned that there was no hint of "Dell" or "Poweredge" during the boot up at all.
 
 The boot up screen only showed this:

@@ -4,8 +4,6 @@ title:  "Installing VCSA"
 date:   2025-04-12 00:38:00 -0400
 categories: deephackmode.io update
 ---
-{% include image-popup.html %}
-
 Now that we have an ESXi host, we can then deploy VCSA as a virtual machine.
 
 VCSA stands for "VMware vCenter Server Appliance".  This is a virtual machine that is pre-configured and optimized for running the VMware vCenter Server and its services.

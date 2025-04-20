@@ -4,8 +4,6 @@ title:  "Searching for a PowerEdge server"
 date:   2025-04-07 17:48:00 -0400
 categories: deephackmode.io update
 ---
-{% include image-popup.html %}
-
 It was Black Friday weekend 2024 when I was searching the Dell website for deals.  Before that, I wasn't sure what stuff to get for myself, and so I thought why not check out datacenter server hardware used for running Hypervisors like ESXi.  That’s how I came across the “PowerEdge” servers.  They are expensive though, like in the few thousands of dollars, and so I thought of searching for a used one instead.
 
 I searched in the Facebook marketplace (FBm) for a “PowerEdge”.  Found one being sold by a guy in Cary, NC.  PowerEdge R720 for $200.  2 cpus, with 128gb ram and no hard drives!  

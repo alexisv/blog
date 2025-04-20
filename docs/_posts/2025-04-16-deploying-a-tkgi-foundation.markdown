@@ -4,8 +4,6 @@ title:  "Deploying a TKGI Foundation"
 date:   2025-04-16 19:48:00 -0400
 categories: deephackmode.io update
 ---
-{% include image-popup.html %}
-
 In the last few posts, I have paved my infrastructure, which comprises a vSphere environment with NSX.  The whole infrastructure is running on a single Dell PowerEdge R740 server.
 
 In this post, I'm going to deploy a TKGI Foundation on top of the infrastructure.
