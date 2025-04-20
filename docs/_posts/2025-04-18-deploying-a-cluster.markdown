@@ -10,9 +10,7 @@ I will use the Ops Manager VM as a jumpbox where I can run the commands to commu
 
 To start with, I will log in to the Ops Manager VM via ssh.  I will use the private key that was the pair to the public key used during the [deployment of the Ops Manager OVA](/deephackmode.io/update/2025/04/16/deploying-a-tkgi-foundation.html#deploy-the-tanzu-operations-manager){:target="_blank"}.  This is the command I used to ssh to the Ops Manager VM.
 
-{% include codeblock.html code="
-ssh -i ssh.key ubuntu@opsmgr.deephackmode.io
-" %}
+{% include codeblock.html code="ssh -i ssh.key ubuntu@opsmgr.deephackmode.io" %}
 
 Once logged in to the Ops Manager VM, I will create a file named `env.sh` that will set up environment variables needed to communicate with the Bosh Director.  Before I do that, I will get the Bosh Commandline Credentials from the Ops Manager.  This can be retrieved from Ops Manager->Bosh Director tile->Credentials->Bosh Commandline Credentials.  Add the `export` command at the beginning of the line when you enter it in the file.  An example of my `env.sh` file is:
 
@@ -24,9 +22,7 @@ export BOSH_CLIENT=ops_manager BOSH_CLIENT_SECRET=xxx BOSH_CA_CERT=/var/tempest/
 ```
 
 To source it, just run it like:
-{% include codeblock.html code="
-. env.sh
-" %}
+{% include codeblock.html code=". env.sh" %}
 
 Now that I have the necessary envars set, I can now run bosh commands.
 
@@ -53,13 +49,9 @@ Next, I will set up the tkgi cli to communicate with the TKGI API server.
 
 Download the tkgi and kubectl cli binaries from the Broadcom Download Portal to the Ops Manager VM.  I will install them using the `install` command:
 
-{% include codeblock.html code="
-sudo install tkgi-linux-amd64-1.21.0-build.55 /usr/local/bin/tkgi
-" %}
+{% include codeblock.html code="sudo install tkgi-linux-amd64-1.21.0-build.55 /usr/local/bin/tkgi" %}
 
-{% include codeblock.html code="
-sudo install kubectl-linux-amd64-1.30.7 /usr/local/bin/kubectl
-" %}
+{% include codeblock.html code="sudo install kubectl-linux-amd64-1.30.7 /usr/local/bin/kubectl" %}
 
 I will retrieve the "Uaa Admin Password" from Ops Manager->TKGI tile->Credentials->Uaa Admin Password.  I will add a line in my `env.sh` file to log in to the TKGI API server.  My updated `env.sh` looks like this now:
 
@@ -84,9 +76,7 @@ Login successful.
 ```
 
 I will now create a cluster by running the following command:
-{% include codeblock.html code="
-tkgi create-cluster orion -p small -n 1 -e orion.deephackmode.io
-" %}
+{% include codeblock.html code="tkgi create-cluster orion -p small -n 1 -e orion.deephackmode.io" %}
 
 In the above example, `orion` is the cluster name, the plan is `small`, the number of workers is `1`, and the FQDN of the cluster's API server is `orion.deephackmode.io`.
 
@@ -121,28 +111,22 @@ Tags:
 Set up DNS to add an entry for the "Kubernetes Master Host" and the "Kubernetes Master IP" seen in the output above.
 
 Log in to the newly created cluster by running `get-credentials`.
-{% include codeblock.html code="
-tkgi get-credentials orion
-" %}
+{% include codeblock.html code="tkgi get-credentials orion" %}
 
 You should now be able to examine the cluster using the `kubectl` cli.  
 
 To see the nodes in the cluster, run:
 
-{% include codeblock.html code="
-kubectl get nodes
-" %}
+{% include codeblock.html code="kubectl get nodes" %}
 
 To see all the pods in the cluster, run:
-{% include codeblock.html code="
-kubectl get pods -A
-" %}
+{% include codeblock.html code="kubectl get pods -A" %}
 
 e.g.,
 ```
 $ kubectl get nodes
 NAME                                   STATUS   ROLES    AGE   VERSION
-41de4611-9d74-4a9f-bbbd-c12efd25cf3d   Ready    <none>   10m   v1.30.7+vmware.1
+41de4611-9d74-4a9f-bbbd-c12efd25cf3d   Ready    <none>   12m   v1.30.7+vmware.1
 
 $ kubectl get pods -A
 NAMESPACE           NAME                                                            READY   STATUS      RESTARTS   AGE
