@@ -14,7 +14,9 @@ I have downloaded the NSX Unified Appliance OVA.
 nsx-unified-appliance-4.2.1.3.0.24533887.ova
 ```
 
-I followed the official [NSX Quickstart guide](https://techdocs.broadcom.com/us/en/vmware-cis/nsx/vmware-nsx/4-2/quick-start-guide/installing-nsx-t.html){:target="_blank"} to install it.
+I followed the official [NSX Quickstart guide](https://techdocs.broadcom.com/us/en/vmware-cis/nsx/vmware-nsx/4-2/quick-start-guide/installing-nsx-t.html){:target="_blank"} to install it.  
+
+⚠️FYI. There's some deviation from the Quickstart Installation because I'm using a single ESXi host and I need to connect the Edge Nodes to separate segments and use different uplink profiles.  This is reflected in [Step 4](/deephackmode.io/update/2025/04/12/nsx-integration.html#step-4).
 
 The NSX Policy API is the default mode, and that is fine and I won't change it to Manager mode.  Later on, I will create the objects using Policy API and so I will use Policy API when I install the TKGI tile.
 
