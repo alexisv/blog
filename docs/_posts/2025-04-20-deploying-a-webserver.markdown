@@ -22,9 +22,9 @@ e.g.,
 ```
 $ kubectl -n nginx get pods
 NAME                    READY   STATUS    RESTARTS   AGE
-nginx-bf5d5cf98-d6l2c   1/1     Running   0          10d
-nginx-bf5d5cf98-jsfrp   1/1     Running   0          10d
-nginx-bf5d5cf98-v6rlp   1/1     Running   0          10d
+nginx-bf5d5cf98-d6l2c   1/1     Running   0          10m
+nginx-bf5d5cf98-jsfrp   1/1     Running   0          10m
+nginx-bf5d5cf98-v6rlp   1/1     Running   0          10m
 ```
 
 Then, to expose the webserver to the outside world (relative to the cluster), run the `expose` command to do so:
