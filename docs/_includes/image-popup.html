@@ -150,10 +150,33 @@
     /* Smaller images on small screens */
     @media (max-width: 600px) {
       .image-row img {
-        width: 120px;
+        width: 240px;
       }
     }
+
+    .image-row-big {
+      display: flex;
+      justify-content: flex-start;
+      gap: 1em;
+      flex-wrap: nowrap; /*changed from 'nowrap'; optional: allow wrapping on small screens */
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 0.5em;
+    }
     
+    .image-row-big img {
+      width: 512px;
+      height: auto;
+      flex-shrink: 0;
+    }
+
+    /* Smaller images on small screens */
+    @media (max-width: 600px) {
+      .image-row-big img {
+        width: 384px;
+      }
+    }    
   </style>
   
   <script>

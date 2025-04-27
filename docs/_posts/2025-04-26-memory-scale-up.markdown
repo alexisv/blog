@@ -27,7 +27,7 @@ I immediately ordered all of the available 8 x 32GB DIMM RAM sticks!
 And just three days later, the package has arrived.  
 
 <figure>
-<div class="image-row">
+<div class="image-row-big">
 <img class="popup-img" src="/assets/images/2025-04-26-memory-scale-up/dimms-1.jpeg" alt="Container with DIMMs" title="Container with DIMMs">
 </div>
 <figcaption>The DIMM sticks were neatly placed inside a plastic container.</figcaption>
@@ -58,7 +58,7 @@ This is what it looked like when it had only 4 DIMM's (4 x 32GB) installed.
 -->
 
 <figure>
-<div class="image-row">
+<div class="image-row-big">
 <img class="popup-img" src="/assets/images/2025-04-26-memory-scale-up/128gb.jpeg" alt="128 GB" title="128 GB">
 </div>
 <figcaption>This is what it looked like when it had only 4 DIMM's (4 x 32GB) installed.</figcaption>
@@ -72,7 +72,7 @@ In the R740, there are 24 memory slots in total.  12 slots per CPU channel.  In 
 ![384 GB](/assets/images/2025-04-26-memory-scale-up/384gb.jpeg "384 GB"){: .popup-img }{: width="256" } -->
 
 <figure>
-<div class="image-row">
+<div class="image-row-big">
 <img class="popup-img" src="/assets/images/2025-04-26-memory-scale-up/384gb.jpeg" alt="384 GB" title="384 GB">
 </div>
 <figcaption>This is now what it looks like with 12 DIMM's installed..</figcaption>
@@ -104,7 +104,7 @@ I entered the BIOS Setup, and enabled Memory Testing and then restarted the syst
 Memory Test completed with no errors!
 
 <figure>
-<div class="image-row">
+<div class="image-row-big">
 <img class="popup-img" src="/assets/images/2025-04-26-memory-scale-up/memory-test-done.png" alt="Memory Test" title="Memory Test">
 </div>
 <figcaption>No errors! What a relief!</figcaption>
@@ -120,7 +120,7 @@ I rebooted the system and entered Lifecycle Manager and ran the Diagnostics Test
 The Memory tests passed!
 
 <figure>
-<div class="image-row">
+<div class="image-row-big">
 <img class="popup-img" src="/assets/images/2025-04-26-memory-scale-up/tests-passed.png" alt="Memory Tests Passed" title="Memory Tests Passed">
 </div>
 <figcaption>Great to see it passed the tests.</figcaption>
@@ -143,7 +143,7 @@ Now iDRAC shows the DIMM’s in the Inventory page.  Each DIMM has a detailed in
 The Memory page also shows all of them with some details like speed, size and type.
 
 <figure>
-<div class="image-row">
+<div class="image-row-big">
 <img class="popup-img" src="/assets/images/2025-04-26-memory-scale-up/memory-page-1.png" alt="Memory page" title="Memory page">
 </div>
 <figcaption>iDRAC System->Memory page shows all 12 DIMM's.</figcaption>
