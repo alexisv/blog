@@ -131,21 +131,25 @@
     }
     .image-row {
       display: flex;
-      justify-content: left;
+      justify-content: flex-start;
       gap: 1em;
       flex-wrap: nowrap; /*changed from 'nowrap'; optional: allow wrapping on small screens */
       overflow-x: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 0.5em;
     }
     
     .image-row img {
       width: 256px;
       height: auto;
-      flex-shrink: 1;
+      flex-shrink: 0;
     }
+
     /* Smaller images on small screens */
     @media (max-width: 600px) {
       .image-row img {
-        width: 100px;
+        width: 120px;
       }
     }
     
