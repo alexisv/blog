@@ -14,8 +14,8 @@ The eBay post was titled "Samsung 32GB 2Rx4 PC4-3200AA DDR4 Server RAM Memory M3
 
 <figure>
 <div class="image-row">
-<img class="popup-img" src="/assets/images/2025-04-26-memory-scale-up/ebay-1.png" alt="eBay post 1" title="eBay post 1" width="256px;">
-<img class="popup-img" src="/assets/images/2025-04-26-memory-scale-up/ebay-2.png" alt="eBay post 2" title="eBay post 2" width="256px">
+<img class="popup-img" src="/assets/images/2025-04-26-memory-scale-up/ebay-1.png" alt="eBay post 1" title="eBay post 1">
+<img class="popup-img" src="/assets/images/2025-04-26-memory-scale-up/ebay-2.png" alt="eBay post 2" title="eBay post 2">
 </div>
 <figcaption>Screenshots of the actual eBay listing by the seller</figcaption>
 </figure> 
