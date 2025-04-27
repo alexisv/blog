@@ -128,20 +128,27 @@
       font-size: 0.9em;
       color: #777;
       margin-top: 0.5em;
-
+    }
     .image-row {
       display: flex;
-      justify-content: center;
+      justify-content: left;
       gap: 1em;
-      flex-wrap: wrap; /* optional: allow wrapping on small screens */
+      flex-wrap: nowrap; /*changed from 'nowrap'; optional: allow wrapping on small screens */
+      overflow-x: auto;
     }
     
     .image-row img {
-      width: 200px;
+      width: 256px;
       height: auto;
+      flex-shrink: 1;
+    }
+    /* Smaller images on small screens */
+    @media (max-width: 600px) {
+      .image-row img {
+        width: 100px;
+      }
     }
     
-    }
 
 
   </style>
