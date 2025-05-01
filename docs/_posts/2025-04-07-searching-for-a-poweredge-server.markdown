@@ -33,8 +33,8 @@ The poster also has another one R640 posting.  This one has 6126 Xeon, which has
 <!--![FBm Post1](/assets/images/FBPost1.png "FBm Post1"){: width="250" }{: .popup-img }   ![FBm Post2](/assets/images/FBpost2.png "FBm Post2"){: width="250" }{: .popup-img }-->
 <figure>
 <div class="image-row">
-<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/FBPost1.png" alt="FBm Post1" title="FBm Post1">
-<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/FBPost2.png" alt="FBm Post2" title="FBm Post2">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/FBpost1.png" alt="FBm Post1" title="FBm Post1">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/FBpost2.png" alt="FBm Post2" title="FBm Post2">
 </div>
 <figcaption>Screenshots of the actual FBm listing by the seller</figcaption>
 </figure> 
