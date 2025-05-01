@@ -12,28 +12,9 @@
         {{ content }}
       </div>
     </main>
-
+    {%- include image-popup.html -%}
     {%- include footer.html -%}
-
-    <script>
-      const toggleBtn = document.getElementById('darkToggle');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const savedPref = localStorage.getItem('dark-mode');
-      const isDark = savedPref ? savedPref === 'true' : prefersDark;
-    
-      if (isDark) {
-        document.body.classList.add('dark-mode');
-        toggleBtn.textContent = '☀️';
-      }
-    
-      toggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const darkEnabled = document.body.classList.contains('dark-mode');
-        localStorage.setItem('dark-mode', darkEnabled);
-        toggleBtn.textContent = darkEnabled ? '☀️' : '🌙';
-      });
-    </script>
-      
+     
   </body>
 
 </html>

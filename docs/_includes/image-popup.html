@@ -178,7 +178,18 @@
       }
     }
     
-    
+    /* Default: Light theme */
+    body {
+      background-color: #fff;
+      color: #111;
+    }
+
+    /* Dark theme override */
+    body.dark-mode {
+      background-color: #111;
+      color: #eee;
+    }
+
     .dark-mode-btn {
       position: fixed;
       top: 1rem;
@@ -195,7 +206,13 @@
       transform: scale(1.2);
     }
 
-
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+    }
+    
   </style>
   
   <script>
