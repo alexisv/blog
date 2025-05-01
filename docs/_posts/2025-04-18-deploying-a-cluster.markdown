@@ -95,7 +95,7 @@ Plan Name:                small
 UUID:                     6907a1e2-979e-4c6a-bc71-ce688837c178
 Last Action:              CREATE
 Last Action State:        succeeded
-Last Action Description:  Instance update completed
+Last Action Description:  Instance provisioning completed
 Kubernetes Master Host:   orion.deephackmode.io
 Kubernetes Master Port:   8443
 Worker Nodes:             1
