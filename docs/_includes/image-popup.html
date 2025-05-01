@@ -203,13 +203,6 @@
       transform: scale(1.2);
     }
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-    }
-
     body.dark-mode a {
       color: #4da3ff;
     }
@@ -264,17 +257,65 @@
       width: 100%;
       color: #eee;
     }
+
     body.dark-mode th,
     body.dark-mode td {
       border: 1px solid #444;
       padding: 0.5em;
       background-color: #222;
     }
+
     body.dark-mode tr:nth-child(even) {
       background-color: #2a2a2a;
     }
+
     body.dark-mode tr:nth-child(odd) {
       background-color: #1e1e1e;
+    }
+
+    body.dark-mode .site-header {
+      background-color: #222;
+    }
+
+    body.dark-mode .site-header a,
+    body.dark-mode .site-nav .page-link {
+      color: #eee;
+    }
+
+    body.dark-mode .site-nav .page-link:hover {
+      color: #fff;
+    }
+
+    body.dark-mode .site-nav .trigger {
+      background-color: #222;
+    }
+
+    body.dark-mode .site-nav .trigger a {
+      color: #eee;
+    }
+
+    body.dark-mode .site-nav .trigger a:hover {
+      color: #fff;
+    }
+
+    body.dark-mode .site-nav label .menu-icon svg path {
+      fill: #eee;
+    }
+
+    body.dark-mode .menu-icon {
+      background-color: #222;
+    }
+
+    body.dark-mode .menu-icon svg {
+      background-color: transparent;
+    }
+
+    body.dark-mode .site-nav label {
+      background-color: #222; /* match your dark theme */
+    }
+
+    body.dark-mode .site-nav {
+      background-color: #222; /* ensure the nav container is dark too */
     }
 
   </style>
