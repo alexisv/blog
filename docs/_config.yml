@@ -21,7 +21,7 @@
 title: deephackmode.io
 #email: alexisv@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  This site contains random articles about technology and other stuff.
+  Exploring systems inside out — from bare metal to containers to random hacks.
 #baseurl: "/blog" # the subpath of your site, e.g. /blog
 baseurl: ""
 url: "https://deephackmode.io" # the base hostname & protocol for your site, e.g. http://example.com

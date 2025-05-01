@@ -30,28 +30,48 @@ Researched even more.  That posting came with pics.  Interestingly, the hardware
 
 The poster also has another one R640 posting.  This one has 6126 Xeon, which has higher clock rate but same number of cores 12.  Also has 128GB.  Only has 4TB HDD in total (4x1TB HDDs).
 
-![FBm Post1](/assets/images/FBPost1.png "FBm Post1"){: width="250" }{: .popup-img }   ![FBm Post2](/assets/images/FBpost2.png "FBm Post2"){: width="250" }{: .popup-img }
+<!--![FBm Post1](/assets/images/FBPost1.png "FBm Post1"){: width="250" }{: .popup-img }   ![FBm Post2](/assets/images/FBpost2.png "FBm Post2"){: width="250" }{: .popup-img }-->
+<figure>
+<div class="image-row">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/FBPost1.png" alt="FBm Post1" title="FBm Post1">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/FBPost2.png" alt="FBm Post2" title="FBm Post2">
+</div>
+<figcaption>Screenshots of the actual FBm listing by the seller</figcaption>
+</figure> 
 
-
-The service tag of the server was shown in the pics.  Here is the rest of the pics that were in the FBm post.
-
+The service tag of the server was shown in one of the pics.
+<!--
 ![FBm Pic1](/assets/images/FBpic1.jpeg "FBm Pic1"){: width="550" }{: .popup-img }
-
 ![FBm Pic2](/assets/images/FBpic2.jpeg "FBm Pic2"){: width="550" }{: .popup-img }
-
 ![FBm Pic3](/assets/images/FBpic3.jpeg "FBm Pic3"){: width="550" }{: .popup-img }
-
 ![FBm Pic4](/assets/images/FBpic4.jpeg "FBm Pic4"){: width="550" }{: .popup-img }
-
 ![FBm Pic5](/assets/images/FBpic5.jpeg "FBm Pic5"){: width="550" }{: .popup-img }
-
 ![FBm Pic6](/assets/images/FBpic6.jpeg "FBm Pic6"){: width="550" }{: .popup-img }
+-->
+
+<figure>
+<div class="image-row-big">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/FBpic1.jpeg" alt="FBm Pic1" title="FBm Pic1">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/FBpic2.jpeg" alt="FBm Pic2" title="FBm Pic2">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/FBpic3.jpeg" alt="FBm Pic3" title="FBm Pic3">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/FBpic4.jpeg" alt="FBm Pic4" title="FBm Pic4">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/FBpic5.jpeg" alt="FBm Pic5" title="FBm Pic5">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/FBpic6.jpeg" alt="FBm Pic6" title="FBm Pic6">
+</div>
+<figcaption>Pictures of the server from the FBm listing</figcaption>
+</figure> 
 
 I looked up the service tag in Dell website.  It is a “OEMR XL R740”.  So, my presumption is getting closer to being true.  Unless the seller posted the wrong pic.  It still has ProSupport but will end on Jan 30 2025, which was in the future, at that time.  Point is that the hardware is still new, relatively.
 
 [Dell OEMR page](https://www.dell.com/support/home/en-us/product-support/servicetag/0-eGhnQ1YvcmplRzdMKzNNMTNDS0ZSZz090/overview){:target="_blank"}
 
-![Dell page](/assets/images/Dell-OEMR.png "Dell-OEMR"){: width="640" }{: .popup-img }
+<!--![Dell page](/assets/images/Dell-OEMR.png "Dell-OEMR"){: width="640" }{: .popup-img }-->
+<figure>
+<div class="image-row-big">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/Dell-OEMR.png" alt="Dell page" title="Dell page">
+</div>
+<figcaption>Pictures of the server from the FBm listing</figcaption>
+</figure> 
 
 This really sounds like a great deal!  That's what I thought.
 
@@ -93,6 +113,7 @@ I got it!  It is the same item that was in the pics, so I am pretty confident th
 
 Took it inside.  Took pics and sent those to my brother.  I remember back in the day when he used to bring home new PC hardware every time and I’ll just enthusiastically watch him install and use software on them.
 
+<!-- 
 ![At Home Pic1](/assets/images/AtHome1.jpeg "At Home Pic1"){: width="550" }{: .popup-img }
 
 ![At Home Pic2](/assets/images/AtHome2.jpeg "At Home Pic2"){: width="550" }{: .popup-img }
@@ -106,6 +127,20 @@ Took it inside.  Took pics and sent those to my brother.  I remember back in the
 ![At Home Pic6](/assets/images/AtHome6.jpeg "At Home Pic6"){: width="550" }{: .popup-img }
 
 ![At Home Pic7](/assets/images/AtHome7.jpeg "At Home Pic7"){: width="550" }{: .popup-img }
+ -->
+
+<figure>
+<div class="image-row-big">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/AtHome1.jpeg" alt="At Home Pic1" title="At Home Pic1">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/AtHome2.jpeg" alt="At Home Pic2" title="At Home Pic2">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/AtHome3.jpeg" alt="At Home Pic3" title="At Home Pic3">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/AtHome4.jpeg" alt="At Home Pic4" title="At Home Pic4">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/AtHome5.jpeg" alt="At Home Pic5" title="At Home Pic5">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/AtHome6.jpeg" alt="At Home Pic6" title="At Home Pic6">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/AtHome7.jpeg" alt="At Home Pic7" title="At Home Pic7">
+</div>
+<figcaption>Some more hardware pictures</figcaption>
+</figure> 
 
 Bought 2 power cables and a VGA cable from the nearest Walmart. $7.99 each cable. 
 
@@ -115,6 +150,12 @@ Connected the VGA cable, power cables, and usb mouse & keyboard too.  Then, stru
 
 Powered it on.  The fans were loud, like a plane is about to take off.  "Welcome to Dell Airlines".
 
-![Dell booting up](/assets/images/Dell-booting.png "Dell booting up"){: width="550" }{: .popup-img }
+<!-- ![Dell booting up](/assets/images/Dell-booting.png "Dell booting up"){: width="550" }{: .popup-img } -->
+<figure>
+<div class="image-row-big">
+<img class="popup-img" src="/assets/images/2025-04-07-searching-for-a-poweredge-server/Dell-booting.png" alt="Dell booting up" title="Dell booting up">
+</div>
+<figcaption>Dell OEMR XL R740 booting up...</figcaption>
+</figure>
 
 It's running!
