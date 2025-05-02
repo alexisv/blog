@@ -1,366 +1,433 @@
-<div class="popup-overlay" id="popupOverlay">
-    <img id="popupImage" src="" alt="Popup image">
-  </div>
+<div class="popup-overlay" id="popupOverlay" role="dialog" aria-modal="true">
+  <button id="popupPrev" class="popup-nav" aria-label="Previous image">◀</button>
+  <img id="popupImage" src="" alt="Popup image">
+  <button id="popupNext" class="popup-nav" aria-label="Next image">▶</button>
+  <div id="popupCaption" class="popup-caption" aria-live="polite"></div>
+</div>
+
+<style>
+  .popup-overlay {
+    position: fixed;
+    display: none;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
   
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const overlay = document.getElementById('popupOverlay');
-      const popupImage = document.getElementById('popupImage');
-      const images = document.querySelectorAll('.popup-img');
+  .popup-overlay.active {
+    display: flex;
+  }
   
-      images.forEach(img => {
-        img.style.cursor = 'zoom-in';
-        img.addEventListener('click', () => {
-          popupImage.src = img.src;
-          overlay.classList.add('active');
-        });
-      });
+  .popup-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border: 4px solid white;
+    border-radius: 8px;
+    box-shadow: 0 0 20px black;
+  }
+  .header-anchor {
+    margin-left: 8px;
+    text-decoration: none;
+    opacity: 0;
+    font-size: 0.8em;
+    transition: opacity 0.2s;
+  }
+  h1:hover .header-anchor,
+  h2:hover .header-anchor,
+  h3:hover .header-anchor,
+  h4:hover .header-anchor,
+  h5:hover .header-anchor,
+  h6:hover .header-anchor {
+    opacity: 1;
+  }
+  .code-block {
+    position: relative;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    padding: 0.3em 0.6em;
+    font-size: 0.8em;
+    background: #f4f4f4;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    z-index: 2;
+  }
+  .copy-btn:hover {
+    opacity: 1;
+  }
+  .post-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid #e0e0e0;
+  }
+  .nav-prev {
+    text-align: left;
+  }
+  .nav-next {
+    text-align: right;
+  }
+  .post-nav a {
+    text-decoration: none;
+    color: #007acc;
+    font-weight: bold;
+  }
+  .post-nav a:hover {
+    text-decoration: underline;
+  }
+  figure {
+    display: inline-block;
+    text-align: center;
+    margin: 1.5em auto;
+  }
+  figcaption {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 0.5em;
+  }
+  .image-row, .image-row-big {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1em;
+    flex-wrap: nowrap; /*changed from 'nowrap'; optional: allow wrapping on small screens */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5em;
+  }
   
-      overlay.addEventListener('click', () => {
-        overlay.classList.remove('active');
-      });
+  .image-row img {
+    width: 256px;
+  }
   
-      document.addEventListener('keydown', (e) => {
-        if (e.key === "Escape") {
-          overlay.classList.remove('active');
-        }
-      });
-    });
-  </script>
+  .image-row-big img {
+    width: 512px;
+  }
   
-  <style>
-    .popup-overlay {
-      position: fixed;
-      display: none;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-  
-    .popup-overlay.active {
-      display: flex;
-    }
-  
-    .popup-overlay img {
-      max-width: 90%;
-      max-height: 90%;
-      border: 4px solid white;
-      border-radius: 8px;
-      box-shadow: 0 0 20px black;
-    }
-
-    .header-anchor {
-      margin-left: 8px;
-      text-decoration: none;
-      opacity: 0;
-      font-size: 0.8em;
-      transition: opacity 0.2s;
-    }
-
-    h1:hover .header-anchor,
-    h2:hover .header-anchor,
-    h3:hover .header-anchor,
-    h4:hover .header-anchor,
-    h5:hover .header-anchor,
-    h6:hover .header-anchor {
-      opacity: 1;
-    }
-
-    .code-block {
-      position: relative;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 0.5em;
-      right: 0.5em;
-      padding: 0.3em 0.6em;
-      font-size: 0.8em;
-      background: #f4f4f4;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      opacity: 0.6;
-      transition: opacity 0.2s;
-      z-index: 2;
-    }
-
-    .copy-btn:hover {
-      opacity: 1;
-    }
-
-    .post-nav {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 2em;
-      padding-top: 1em;
-      border-top: 1px solid #e0e0e0;
-    }
-
-    .nav-prev {
-      text-align: left;
-    }
-
-    .nav-next {
-      text-align: right;
-    }
-
-    .post-nav a {
-      text-decoration: none;
-      color: #007acc;
-      font-weight: bold;
-    }
-
-    .post-nav a:hover {
-      text-decoration: underline;
-    }
-
-    figure {
-      display: inline-block;
-      text-align: center;
-      margin: 1.5em auto;
-    }
-
-    figcaption {
-      font-size: 0.9em;
-      color: #777;
-      margin-top: 0.5em;
-    }
-
-    .image-row {
-      display: flex;
-      justify-content: flex-start;
-      gap: 1em;
-      flex-wrap: nowrap; /*changed from 'nowrap'; optional: allow wrapping on small screens */
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 0.5em;
-    }
-    
+  /* Smaller images on small screens */
+  @media (max-width: 600px) {
     .image-row img {
-      width: 256px;
-      height: auto;
-      flex-shrink: 0;
+      width: 192px;
     }
-
-    /* Smaller images on small screens */
-    @media (max-width: 600px) {
-      .image-row img {
-        width: 192px;
-      }
-    }
-
-    .image-row-big {
-      display: flex;
-      justify-content: flex-start;
-      gap: 1em;
-      flex-wrap: nowrap; /*changed from 'nowrap'; optional: allow wrapping on small screens */
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 0.5em;
-    }
-    
-    .image-row-big img {
-      width: 512px;
-      height: auto;
-      flex-shrink: 0;
-    }
-
-    /* Smaller images on small screens */
-    @media (max-width: 600px) {
-      .image-row-big img {
-        width: 384px;
-      }
-    }
-    
-    /* Default: Light theme */
-    body {
-      background-color: #fff;
-      color: #111;
-    }
-
-    /* Dark theme override */
-    body.dark-mode {
-      background-color: #111;
-      color: #eee;
-    }
-
-    .dark-mode-btn {
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      margin-right: 1rem;
-      color: inherit;
-    }
-
-    .dark-mode-btn:hover {
-      transform: scale(1.2);
-    }
-
-    body.dark-mode a {
-      color: #4da3ff;
-    }
-
-    body.dark-mode figcaption {
-      color: #aaa;
-    }
-
-    body.dark-mode .copy-btn {
-      background: #333;
-      color: #eee;
-    }
-
-    body.dark-mode .popup-overlay img {
-      border-color: #ccc;
-      box-shadow: 0 0 20px #000;
-    }
-
-    body.dark-mode .post-nav a {
-      color: #4da3ff;
-    }
-
-    body.dark-mode .post-nav a:hover {
-      text-decoration: underline;
-      color: #70bfff;
-    }
-
-    body.dark-mode .site-title,
-    body.dark-mode .page-link {
-      color: #eee;
-    }
-
-    body.dark-mode code,
-    body.dark-mode pre {
-      background-color: #222;
-      color: #eee;
-    }
-
-    body.dark-mode .highlight {
-      background-color: #222 !important;
-    }
-
-    /* Optional: border and padding for better visibility */
-    body.dark-mode pre {
-      border: 1px solid #444;
-      padding: 0.5em;
-      border-radius: 4px;
-    }
-
-    body.dark-mode table {
-      border-collapse: collapse;
-      width: 100%;
-      color: #eee;
-    }
-
-    body.dark-mode th,
-    body.dark-mode td {
-      border: 1px solid #444;
-      padding: 0.5em;
-      background-color: #222;
-    }
-
-    body.dark-mode tr:nth-child(even) {
-      background-color: #2a2a2a;
-    }
-
-    body.dark-mode tr:nth-child(odd) {
-      background-color: #1e1e1e;
-    }
-
-    body.dark-mode .site-header {
-      background-color: #222;
-    }
-
-    body.dark-mode .site-header a,
-    body.dark-mode .site-nav .page-link {
-      color: #eee;
-    }
-
-    body.dark-mode .site-nav .page-link:hover {
-      color: #fff;
-    }
-
-    body.dark-mode .site-nav .trigger {
-      background-color: #222;
-    }
-
-    body.dark-mode .site-nav .trigger a {
-      color: #eee;
-    }
-
-    body.dark-mode .site-nav .trigger a:hover {
-      color: #fff;
-    }
-
-    body.dark-mode .site-nav label .menu-icon svg path {
-      fill: #eee;
-    }
-
-    body.dark-mode .menu-icon {
-      background-color: #222;
-    }
-
-    body.dark-mode .menu-icon svg {
-      background-color: transparent;
-    }
-
-    body.dark-mode .site-nav label {
-      background-color: #222; /* match your dark theme */
-    }
-
-    body.dark-mode .site-nav {
-      background-color: #222; /* ensure the nav container is dark too */
-    }
-
-  </style>
   
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-      headers.forEach(header => {
-        if (header.id) {
-          const anchor = document.createElement("a");
-          anchor.href = `#${header.id}`;
-          anchor.className = "header-anchor";
-          anchor.innerHTML = "🔗"; // You can replace this with an SVG or icon font
-          header.appendChild(anchor);
+    .image-row-big img {
+      width: 384px;
+    }
+  }
+  
+  /* Default: Light theme */
+  body {
+    background-color: #fff;
+    color: #111;
+  }
+  /* Dark theme override */
+  body.dark-mode {
+    background-color: #111;
+    color: #eee;
+  }
+  .dark-mode-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 1rem;
+    color: inherit;
+  }
+  .dark-mode-btn:hover {
+    transform: scale(1.2);
+  }
+  body.dark-mode a {
+    color: #4da3ff;
+  }
+  body.dark-mode figcaption {
+    color: #aaa;
+  }
+  body.dark-mode .copy-btn {
+    background: #333;
+    color: #eee;
+  }
+  body.dark-mode .popup-overlay img {
+    border-color: #ccc;
+    box-shadow: 0 0 20px #000;
+  }
+  body.dark-mode .post-nav a {
+    color: #4da3ff;
+  }
+  body.dark-mode .post-nav a:hover {
+    text-decoration: underline;
+    color: #70bfff;
+  }
+  body.dark-mode .site-title,
+  body.dark-mode .page-link {
+    color: #eee;
+  }
+  body.dark-mode code,
+  body.dark-mode pre {
+    background-color: #222;
+    color: #eee;
+  }
+  body.dark-mode .highlight {
+    background-color: #222 !important;
+  }
+  /* Optional: border and padding for better visibility */
+  body.dark-mode pre {
+    border: 1px solid #444;
+    padding: 0.5em;
+    border-radius: 4px;
+  }
+  body.dark-mode table {
+    border-collapse: collapse;
+    width: 100%;
+    color: #eee;
+  }
+  body.dark-mode th,
+  body.dark-mode td {
+    border: 1px solid #444;
+    padding: 0.5em;
+    background-color: #222;
+  }
+  body.dark-mode tr:nth-child(even) {
+    background-color: #2a2a2a;
+  }
+  body.dark-mode tr:nth-child(odd) {
+    background-color: #1e1e1e;
+  }
+  body.dark-mode .site-header {
+    background-color: #222;
+  }
+  body.dark-mode .site-header a,
+  body.dark-mode .site-nav .page-link {
+    color: #eee;
+  }
+  body.dark-mode .site-nav .page-link:hover {
+    color: #fff;
+  }
+  body.dark-mode .site-nav .trigger {
+    background-color: #222;
+  }
+  body.dark-mode .site-nav .trigger a {
+    color: #eee;
+  }
+  body.dark-mode .site-nav .trigger a:hover {
+    color: #fff;
+  }
+  
+  body.dark-mode .menu-icon {
+    background-color: #222;
+  }
+  body.dark-mode .menu-icon svg {
+    background-color: transparent;
+  }
+  
+  body.dark-mode .site-nav label {
+    background-color: #222; /* match your dark theme */
+  }
+  
+  body.dark-mode .site-nav {
+    background-color: #222; /* ensure the nav container is dark too */
+  }
+  
+  /* Ensure the icon itself is styled correctly */
+  body.dark-mode .menu-icon {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+  
+  /* Force the SVG to not carry any background */
+  body.dark-mode .menu-icon svg {
+    background-color: transparent;
+    border: none;
+  }
+  
+  
+  /* Explicitly style SVG path to be light */
+  body.dark-mode .menu-icon svg path {
+    fill: #eee;
+  }
+  
+  
+  /* Ensure the dropdown background and corners are seamless */
+  body.dark-mode .site-nav .trigger {
+    background-color: #222;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+  
+  /* Ensure the container around the menu doesn't have odd gaps */
+  body.dark-mode .site-nav {
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* Optional: unify the top container if needed */
+  body.dark-mode .site-header {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  body {
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .popup-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 0.5em;
+    cursor: pointer;
+    z-index: 10000;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    user-select: none;
+  }
+
+  #popupPrev { left: 20px; }
+  #popupNext { right: 20px; }
+
+  .popup-caption {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    color: #eee;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  /* Dark mode (optional) */
+  body.dark-mode .popup-caption {
+    color: #ccc;
+  }
+
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    //Anchors
+    const headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+    headers.forEach(header => {
+      if (header.id) {
+        const anchor = document.createElement("a");
+        anchor.href = `#${header.id}`;
+        anchor.className = "header-anchor";
+        anchor.innerHTML = "🔗"; // You can replace this with an SVG or icon font
+        header.appendChild(anchor);
+      }
+    });
+
+    //Image Popup
+    const images = Array.from(document.querySelectorAll('.popup-img'));
+    const overlay = document.getElementById('popupOverlay');
+    const popupImage = document.getElementById('popupImage');
+    const popupCaption = document.getElementById('popupCaption');
+    const popupPrev = document.getElementById('popupPrev');
+    const popupNext = document.getElementById('popupNext');
+
+    let currentIndex = -1;
+
+    const showImageAtIndex = (index) => {
+      if (index >= 0 && index < images.length) {
+        currentIndex = index;
+        const img = images[currentIndex];
+        popupImage.src = img.src;
+        popupCaption.textContent = img.alt || '';
+        overlay.classList.add('active');
+        popupImage.focus();
+      }
+    };
+
+    images.forEach((img, index) => {
+      img.style.cursor = 'zoom-in';
+      img.setAttribute('tabindex', '0');
+
+      const showPopup = () => showImageAtIndex(index);
+
+      img.addEventListener('click', showPopup);
+      img.addEventListener('keydown', (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          showPopup();
         }
       });
     });
-  </script>
-  
-  <script>
-    function copyCode(button) {
-      const code = button.nextElementSibling.querySelector('code').innerText;
-      navigator.clipboard.writeText(code).then(() => {
-        button.innerText = "Copied!";
-        setTimeout(() => button.innerText = "Copy", 2000);
-      });
-    }
-  </script>
-  
-    <script>
-      const toggleBtn = document.getElementById('darkToggle');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const savedPref = localStorage.getItem('dark-mode');
-      const isDark = savedPref ? savedPref === 'true' : prefersDark;
-    
-      if (isDark) {
-        document.body.classList.add('dark-mode');
-        toggleBtn.textContent = '☀️';
+
+    popupPrev.addEventListener('click', () => showImageAtIndex(currentIndex - 1));
+    popupNext.addEventListener('click', () => showImageAtIndex(currentIndex + 1));
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay || e.target === popupImage) {
+        overlay.classList.remove('active');
       }
-    
-      toggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const darkEnabled = document.body.classList.contains('dark-mode');
-        localStorage.setItem('dark-mode', darkEnabled);
-        toggleBtn.textContent = darkEnabled ? '☀️' : '🌙';
-      });
-    </script>
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!overlay.classList.contains('active')) return;
+      if (e.key === "Escape") {
+        overlay.classList.remove('active');
+      } else if (e.key === "ArrowRight") {
+        showImageAtIndex(currentIndex + 1);
+      } else if (e.key === "ArrowLeft") {
+        showImageAtIndex(currentIndex - 1);
+      }
+    });
+
+    // Optional swipe support
+    let startX = 0;
+    popupImage.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+    popupImage.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) showImageAtIndex(currentIndex + 1); // swipe left
+        else showImageAtIndex(currentIndex - 1); // swipe right
+      }
+    });
+  });
+
+</script>
+
+<script>
+  function copyCode(button) {
+    const code = button.nextElementSibling.querySelector('code').innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      button.innerText = "Copied!";
+      setTimeout(() => button.innerText = "Copy", 2000);
+    });
+  }
+</script>
+
+<script>
+  const toggleBtn = document.getElementById('darkToggle');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const savedPref = localStorage.getItem('dark-mode');
+  const isDark = savedPref ? savedPref === 'true' : prefersDark;
   
+  if (isDark) {
+    document.body.classList.add('dark-mode');
+    toggleBtn.textContent = '☀️';
+  }
+  
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const darkEnabled = document.body.classList.contains('dark-mode');
+    localStorage.setItem('dark-mode', darkEnabled);
+    toggleBtn.textContent = darkEnabled ? '☀️' : '🌙';
+  });
+</script>
