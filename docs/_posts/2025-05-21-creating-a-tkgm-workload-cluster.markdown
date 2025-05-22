@@ -38,7 +38,7 @@ ubuntu@numbat:~$
 
 ### Create the Workload Cluster configuration file
 
-I copied the Management Cluster config file and changed a few settings such as CLUSTER_NAME and VSPHERE_TEMPLATE.  I also removed some all the settings with names that start with "MANAGEMENT_NODE_IPAM_IP_POOL", and replaced them with the NODE_IPAM_IP_POOL_* settings.
+I copied the Management Cluster config file and changed a few settings such as CLUSTER_NAME and VSPHERE_TEMPLATE.  I also removed all of the settings with names that start with "MANAGEMENT_NODE_IPAM_IP_POOL", and replaced them with the NODE_IPAM_IP_POOL_* settings.
 
 ```
 $ cat av-wkld.yaml
