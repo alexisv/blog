@@ -239,9 +239,11 @@ ubuntu@numbat:~$ tanzu package installed list -A
 ubuntu@numbat:~$
 ```
 
-Checking Avi Controller UI - Applications page
 
+### Some clean up and Avi checks
 In Avi, I deleted the "dummy" Virtual Service, which was [created](https://deephackmode.io/deephackmode.io/update/2025/05/09/installing-avi.html#create-a-dummy-virtual-service){:target="_blank"} as a test during the deployment of the Avi Controller.
+
+I looked at the Applications and Infrastrucutre pages in the Avi Controller UI as well, and they appear to be fine.
 
 <figure>
 <div class="image-row-big">
