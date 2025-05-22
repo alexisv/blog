@@ -342,6 +342,128 @@ I ran the following command to start the cluster creation.
 tanzu management-cluster create -f mgmt.yaml -v 6
 ```
 
+After a few minutes, it has completed successfully.  Basic checks of the management cluster, pods and packages were all fine.
+
+```
+
+ubuntu@numbat:~$ tanzu mc get --show-details
+  NAME     NAMESPACE   STATUS   CONTROLPLANE  WORKERS  KUBERNETES         ROLES       PLAN  TKR
+  av-mgmt  tkg-system  running  1/1           1/1      v1.28.11+vmware.2  management  dev   v1.28.11---vmware.2-tkg.2
+
+
+Details:
+
+NAME                                                                           READY  SEVERITY  REASON  SINCE  MESSAGE
+/av-mgmt                                                                       True                     11m
+├─ClusterInfrastructure - VSphereCluster/av-mgmt-bxfh2                         True                     11m
+├─ControlPlane - KubeadmControlPlane/av-mgmt-controlplane-8chpd                True                     8m
+│ └─Machine/av-mgmt-controlplane-8chpd-khb48                                   True                     8m
+│   ├─BootstrapConfig - KubeadmConfig/av-mgmt-controlplane-8chpd-khb48         True                     8m
+│   └─MachineInfrastructure - VSphereMachine/av-mgmt-controlplane-8chpd-khb48  True                     8m
+└─Workers
+  └─MachineDeployment/av-mgmt-md-0-pfwtg                                       True                     7m
+    └─Machine/av-mgmt-md-0-pfwtg-lj65v-fx8qm                                   True                     7m
+      ├─BootstrapConfig - KubeadmConfig/av-mgmt-md-0-pfwtg-lj65v-fx8qm         True                     7m
+      └─MachineInfrastructure - VSphereMachine/av-mgmt-md-0-pfwtg-lj65v-fx8qm  True                     7m
+
+
+Providers:
+
+  NAMESPACE                          NAME                    TYPE                    PROVIDERNAME  VERSION
+  caip-in-cluster-system             ipam-in-cluster         IPAMProvider            in-cluster    v0.1.0
+  capi-kubeadm-bootstrap-system      bootstrap-kubeadm       BootstrapProvider       kubeadm       v1.7.3
+  capi-kubeadm-control-plane-system  control-plane-kubeadm   ControlPlaneProvider    kubeadm       v1.7.3
+  capi-system                        cluster-api             CoreProvider            cluster-api   v1.7.3
+  capv-system                        infrastructure-vsphere  InfrastructureProvider  vsphere       v1.10.1
+ubuntu@numbat:~$
+```
+
+```
+ubuntu@numbat:~$ kubectl cluster-info
+Kubernetes control plane is running at https://192.168.86.205:6443
+CoreDNS is running at https://192.168.86.205:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+ubuntu@numbat:~$
+
+ubuntu@numbat:~$ kubectl get no
+NAME                               STATUS   ROLES           AGE   VERSION
+av-mgmt-controlplane-8chpd-khb48   Ready    control-plane   20m    v1.28.11+vmware.2
+av-mgmt-md-0-pfwtg-lj65v-fx8qm     Ready    <none>          20m    v1.28.11+vmware.2
+
+ubuntu@numbat:~$ kubectl get po -A
+NAMESPACE                           NAME                                                             READY   STATUS      RESTARTS   AGE
+avi-system                          ako-0                                                            1/1     Running     0          20m
+caip-in-cluster-system              caip-in-cluster-controller-manager-5d9465c5c8-z5b76              1/1     Running     0          20m
+capi-kubeadm-bootstrap-system       capi-kubeadm-bootstrap-controller-manager-596dc5b8f7-jdg8k       1/1     Running     0          20m
+capi-kubeadm-control-plane-system   capi-kubeadm-control-plane-controller-manager-5f6954db45-9f5t6   1/1     Running     0          20m
+capi-system                         capi-controller-manager-8cc4cfdfb-2l9h9                          1/1     Running     0          20m
+capv-system                         capv-controller-manager-7b757d847-tb7pk                          1/1     Running     0          20m
+cert-manager                        cert-manager-b667b6c79-c2rgh                                     1/1     Running     0          20m
+cert-manager                        cert-manager-cainjector-68fd55cd74-8nr9p                         1/1     Running     0          20m
+cert-manager                        cert-manager-webhook-7ff4cfd876-tplkk                            1/1     Running     0          20m
+kube-system                         antrea-agent-6qhdx                                               2/2     Running     0          20m
+kube-system                         antrea-agent-j5smh                                               2/2     Running     0          20m
+kube-system                         antrea-controller-5c49559ccb-5sfq7                               1/1     Running     0          20m
+kube-system                         coredns-8444fc749f-5hrfl                                         1/1     Running     0          20m
+kube-system                         coredns-8444fc749f-8tgwj                                         1/1     Running     0          20m
+kube-system                         etcd-av-mgmt-controlplane-8chpd-khb48                            1/1     Running     0          20m
+kube-system                         kube-apiserver-av-mgmt-controlplane-8chpd-khb48                  1/1     Running     0          20m
+kube-system                         kube-controller-manager-av-mgmt-controlplane-8chpd-khb48         1/1     Running     0          20m
+kube-system                         kube-proxy-l48qg                                                 1/1     Running     0          20m
+kube-system                         kube-proxy-qlnfw                                                 1/1     Running     0          20m
+kube-system                         kube-scheduler-av-mgmt-controlplane-8chpd-khb48                  1/1     Running     0          20m
+kube-system                         metrics-server-8cc9c7d6d-dhd9c                                   1/1     Running     0          20m
+kube-system                         vsphere-cloud-controller-manager-5sw2l                           1/1     Running     0          20m
+secretgen-controller                secretgen-controller-bbc965bd6-hgpsq                             1/1     Running     0          20m
+tanzu-auth                          tanzu-auth-controller-manager-66b777f685-pqlqb                   1/1     Running     0          20m
+tkg-system-networking               ako-operator-controller-manager-5c4ffb96c6-xt7bd                 1/1     Running     0          20m
+tkg-system                          kapp-controller-676ddf59fb-kcnwv                                 2/2     Running     0          20m
+tkg-system                          object-propagation-controller-manager-5bfdbf8f8c-djfkd           1/1     Running     0          20m
+tkg-system                          tanzu-addons-controller-manager-67d444cf8f-fvzmt                 1/1     Running     0          20m
+tkg-system                          tanzu-capabilities-controller-manager-5558bb644f-24xgc           1/1     Running     0          20m
+tkg-system                          tanzu-featuregates-controller-manager-86b9fd7c99-cblzm           1/1     Running     0          20m
+tkg-system                          tkg-runtime-extension-745885cddf-m9pkn                           1/1     Running     0          20m
+tkg-system                          tkr-conversion-webhook-manager-6bf58b8ff6-wwh9l                  1/1     Running     0          20m
+tkg-system                          tkr-resolver-cluster-webhook-manager-665db4d6b5-47vbw            1/1     Running     0          20m
+tkg-system                          tkr-source-controller-manager-5696cdfcb5-k2fqx                   1/1     Running     0          20m
+tkg-system                          tkr-status-controller-manager-5676d6b7cd-np2z4                   1/1     Running     0          20m
+tkg-system                          tkr-vsphere-resolver-webhook-manager-6988b8f496-m299f            1/1     Running     0          20m
+vmware-system-antrea                register-placeholder-5fhtd                                       0/1     Completed   0          20m
+vmware-system-csi                   vsphere-csi-controller-76df4bc4c6-tcggv                          7/7     Running     0          20m
+vmware-system-csi                   vsphere-csi-node-h4pzs                                           3/3     Running     0          20m
+vmware-system-csi                   vsphere-csi-node-zfnr6                                           3/3     Running     0          20m
+ubuntu@numbat:~$
+
+ubuntu@numbat:~$ tanzu package installed list -A
+
+  NAMESPACE   NAME                                       PACKAGE-NAME                                        PACKAGE-VERSION        STATUS
+  tkg-system  ako-operator                               ako-operator-v2.tanzu.vmware.com                    0.32.3+vmware.1-tkg.1  Reconcile succeeded
+  tkg-system  av-mgmt-antrea                             antrea.tanzu.vmware.com                             1.13.3+vmware.4-tkg.1  Reconcile succeeded
+  tkg-system  av-mgmt-capabilities                       capabilities.tanzu.vmware.com                       0.32.3+vmware.1        Reconcile succeeded
+  tkg-system  av-mgmt-gateway-api                        gateway-api.tanzu.vmware.com                        1.0.0+vmware.1-tkg.2   Reconcile succeeded
+  tkg-system  av-mgmt-load-balancer-and-ingress-service  load-balancer-and-ingress-service.tanzu.vmware.com  1.11.2+vmware.2-tkg.2  Reconcile succeeded
+  tkg-system  av-mgmt-metrics-server                     metrics-server.tanzu.vmware.com                     0.6.2+vmware.8-tkg.1   Reconcile succeeded
+  tkg-system  av-mgmt-pinniped                           pinniped.tanzu.vmware.com                           0.25.0+vmware.3-tkg.1  Reconcile succeeded
+  tkg-system  av-mgmt-secretgen-controller               secretgen-controller.tanzu.vmware.com               0.15.0+vmware.2-tkg.1  Reconcile succeeded
+  tkg-system  av-mgmt-tkg-storageclass                   tkg-storageclass.tanzu.vmware.com                   0.32.3+vmware.1        Reconcile succeeded
+  tkg-system  av-mgmt-vsphere-cpi                        vsphere-cpi.tanzu.vmware.com                        1.28.0+vmware.3-tkg.2  Reconcile succeeded
+  tkg-system  av-mgmt-vsphere-csi                        vsphere-csi.tanzu.vmware.com                        3.3.0+vmware.1-tkg.1   Reconcile succeeded
+  tkg-system  tanzu-addons-manager                       addons-manager.tanzu.vmware.com                     0.32.3+vmware.1        Reconcile succeeded
+  tkg-system  tanzu-auth                                 tanzu-auth.tanzu.vmware.com                         0.32.3+vmware.1        Reconcile succeeded
+  tkg-system  tanzu-cliplugins                           cliplugins.tanzu.vmware.com                         0.32.3+vmware.1        Reconcile succeeded
+  tkg-system  tanzu-core-management-plugins              core-management-plugins.tanzu.vmware.com            0.32.3+vmware.1        Reconcile succeeded
+  tkg-system  tanzu-featuregates                         featuregates.tanzu.vmware.com                       0.32.3+vmware.1        Reconcile succeeded
+  tkg-system  tanzu-framework                            framework.tanzu.vmware.com                          0.32.3+vmware.1        Reconcile succeeded
+  tkg-system  tkg-clusterclass                           tkg-clusterclass.tanzu.vmware.com                   0.32.3+vmware.1        Reconcile succeeded
+  tkg-system  tkg-pkg                                    tkg.tanzu.vmware.com                                0.32.3+vmware.1        Reconcile succeeded
+  tkg-system  tkr-service                                tkr-service.tanzu.vmware.com                        0.32.3+vmware.1        Reconcile succeeded
+  tkg-system  tkr-source-controller                      tkr-source-controller.tanzu.vmware.com              0.32.3+vmware.1        Reconcile succeeded
+  tkg-system  tkr-vsphere-resolver                       tkr-vsphere-resolver.tanzu.vmware.com               0.32.3+vmware.1        Reconcile succeeded
+ubuntu@numbat:~$
+```
+
+
 
 
 
