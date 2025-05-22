@@ -4,15 +4,15 @@ title:  "Creating a TKGM Workload Cluster"
 date:   2025-05-21 23:06:00 -0400
 categories: deephackmode.io update
 ---
-This time I created a Workload Cluster using the Ubuntu image with k8s version 1.30.2.
+In this post, I share the steps that I executed to create a Workload Cluster using the Ubuntu image with k8s version 1.30.2.  Once a Management Cluster is up and running, it's easier to be able to create a Workload Cluster.  I said that because, for the most part, you just need to copy the cluster config file that worked for the Management Cluster and change a few settings that are unique to the cluster.  I also created a Cluster IP Pool to be used by the Workload Cluster, so that I don't have to rely on DHCP.  This installation also uses the steps for deployment in an airgapped environment, and so it used the same [container images that were transferred to the private registry](https://deephackmode.io/deephackmode.io/update/2025/05/14/creating-management-cluster.html#transfer-images-to-the-private-registry){:target="_blank"}.
 
 ### Download the TKGM Ubuntu OVA
 
-I downloaded the Ubuntu 2204 Kubernetes v1.30.2 OVA image from the Broadcom Support Portal.
+I downloaded the Ubuntu 2204 Kubernetes v1.30.2 OVA image, for TKGM v2.5.2, from the Broadcom Support Portal.
 
 ### Upload the image to vCenter
 
-I uploaded the image to vCenter using the [same steps](http://127.0.0.1:4000/deephackmode.io/update/2025/05/13/creating-management-cluster.html#upload-the-base-image){:target="_blank"} that I ran during Management Cluster creation.
+I uploaded the image to vCenter using the [same steps](https://deephackmode.io/deephackmode.io/update/2025/05/14/creating-management-cluster.html#upload-the-base-image){:target="_blank"} that I ran during Management Cluster creation.
 
 
 ### Create a Cluster IP Pool
@@ -240,7 +240,7 @@ ubuntu@numbat:~$
 ```
 
 
-### Some clean up and Avi checks
+### Clean up and checks in Avi
 In Avi, I deleted the "dummy" Virtual Service, which was [created](https://deephackmode.io/deephackmode.io/update/2025/05/09/installing-avi.html#create-a-dummy-virtual-service){:target="_blank"} as a test during the deployment of the Avi Controller.
 
 I looked at the Applications and Infrastrucutre pages in the Avi Controller UI as well, and they appear to be fine.
@@ -265,6 +265,9 @@ I looked at the Applications and Infrastrucutre pages in the Avi Controller UI a
 <figcaption>The Service Engines status look good in Avi Controller UI</figcaption>
 </figure> 
 
+Also, the fact that the k8s API server on both the Management and Workload clusters are up and running, as evidenced by the kubectl outputs, means that the Avi Controller, Service Engines, Virtual Servers, and Load balancers are all running healthy.
+
+In the next post, I'm planning to scale out the nodes in this cluster and install the Tanzu Mission Control Self-Managed (TMC-SM).
 
 
 
