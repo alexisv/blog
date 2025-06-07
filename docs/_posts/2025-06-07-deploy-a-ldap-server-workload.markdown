@@ -4,13 +4,13 @@ title:  "Deploy a LDAP server workload"
 date:   2025-06-07 13:21:00 -0400
 categories: deephackmode.io update
 ---
-I will need a LDAP server as part of the authentication system of my TMC-SM deployment.  This LDAP server will is a separate application workload and can be used by other components as well such as Ops Manager, TKGI, etc.  I will be deploying the LDAP server as a kubernetes workload in a TKGI cluster.
+I will need a LDAP server as part of the authentication system of my TMC-SM deployment.  This LDAP server is a separate application workload and can be used by other components as well such as Ops Manager, TKGI, etc.  I will be deploying the LDAP server as a kubernetes workload in a TKGI cluster.
 
 ### Prepare the TKGI cluster
 
-The only thing I needed to do to prepare the TKGI cluster, is to create a default StorageClass.  That's because I need to store the LDAP data in a persistent volume, so that the data will not be wiped out in case of pod restarts.
+The only thing I needed to do to prepare the TKGI cluster, is to create a default StorageClass.  That's because there was no default at all, and I need to store the LDAP data in a persistent volume, so that the data will not be wiped out in case of pod restarts.
 
-In my jumpbox "numbat", I created a YAML file for the StorageClass definition:
+In the Ops Manager VM, which I use as my jumpbox for my TKGI cluster, I created a YAML file for the StorageClass definition:
 
 {% include codeblock.html code="cat > sc.yaml <<EOF
 apiVersion: storage.k8s.io/v1
@@ -40,6 +40,8 @@ To keep things organized, I need to create a namespace named "openldap" for the 
 " %}
 
 ### Create a certificate and key for LDAP TLS
+
+These are needed so that the LDAP server can use TLS/SSL.  I will create a self-signed certificate. 
 
 Create a SSL config with Subject Alternative Name (SAN).  The config file is named `ldap-cert.conf`.
 
@@ -92,6 +94,8 @@ This gives 2 files:
 
 ### Create the TLS secret
 
+This is to store the cert and key in a kubernetes secret that can be used by the workload app (LDAP).
+
 {% capture secret_code %}
 kubectl -n openldap create secret tls ldap-tls \
   --cert=ldap.deephackmode.io.crt \
@@ -103,7 +107,7 @@ kubectl -n openldap create secret tls ldap-tls \
 
 ### Create the Deployment definition YAML
 
-Create the definition YAML for the deployment, pvc's and service.
+Create the definition YAML for the kubernetes deployment, pvc's and service.
 
 {% capture yaml_code %}
 cat > openldap.yaml <<EOF
@@ -223,7 +227,7 @@ EOF
 
 {% include codeblock.html code=yaml_code %}
 
-Create the resources:
+Create the kubernetes resources from the YAML:
 {% include codeblock.html code="k -n openldap apply -f openldap.yaml" %}
 
 
@@ -263,13 +267,13 @@ run this container with '--loglevel debug'
 ```
 
 
-In the jumpbox, install the ldap-utils package to get the `ldapsearch` cli.
+In the jumpbox "numbat", which I use to examine my TKGM clusters, install the ldap-utils package to make the `ldapsearch` cli available for use.
 
 {% include codeblock.html code="sudo apt update
 sudo apt install ldap-utils
 " %}
 
-Run ldapsearch using TLS/LDAPS and the self-signed cert as the CA.
+Run `ldapsearch` using TLS/SSL and the cert file `ldap.deephackmode.io.crt` as the CA file.
 
 ```
 ubuntu@numbat:~$ env LDAPTLS_CACERT=ldap.deephackmode.io.crt ldapsearch -H 'ldaps://ldap.deephackmode.io' -b dc=deephackmode,dc=io -D "cn=admin,dc=deephackmode,dc=io" -w admin
@@ -466,5 +470,5 @@ ubuntu@numbat:~$
 ```
 
 
-At this point, the LDAP server now has the users and groups that I can use.  It also can communicate via TLS.  This should now be ready for the TMC-SM installation.
+At this point, the LDAP server now has the users and groups that I can use.  It also can communicate via TLS/SSL.  This should now be ready for the TMC-SM installation.
 
