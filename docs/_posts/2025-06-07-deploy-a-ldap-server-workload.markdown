@@ -303,7 +303,7 @@ ubuntu@numbat:~$
 ```
 
 
-Create a LDIF file with example user and group records for our use case.
+Create a LDIF file with example user and group records for our use case.  The password hardcoded in this LDIF are all the same, and it is the literal word `incorrect`.
 
 {% capture ldif_code %}
 cat > ldap.ldif <<EOF
