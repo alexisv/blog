@@ -10,16 +10,16 @@ As of this writing, the latest version of TMC-SM is 1.4.1, which I will use here
 
 ### Add the tanzu-standard package repository
 
-This is to the repository where tanzu packages will be downloaded from.  Since I have an airgapped environment, I need to specify the private Harbor registry URL, which is `harbor.deephackmode.io/tkg`.  
+This repository is where the tanzu packages will be downloaded from.  Since I have an airgapped environment, I need to specify the private Harbor registry URL, which is `harbor.deephackmode.io/tkg`.  
 
-Also, I also need to specify the Tanzu Standarad Package Repo version, which is `v2024.8.21`.  To know which version to use according to the TKGM version, review [the version mapping table from the TKGM docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-kubernetes-grid/2-5/tkg/about-tkg-plugins.html#:~:text=The%20Tanzu%20Standard%20package%20repository%20version%20that%20works%20with%20the%20TKG%20version){:target="_blank"}.
+Also, I also need to specify the right Tanzu Standarad Package Repo version, which is `v2024.8.21`.  To know which package repo version to use according to the TKGM version, review [the version mapping table from the TKGM docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-kubernetes-grid/2-5/tkg/about-tkg-plugins.html#:~:text=The%20Tanzu%20Standard%20package%20repository%20version%20that%20works%20with%20the%20TKG%20version){:target="_blank"}.
 
 Make sure that the current cluster context is set to the TKGM workload cluster.  Run the `tanzu package` command, with the right parameters, to add the repo.  Remember that I've been using the aliases `t` and `k` for the commands `tanzu` and `kubectl` respectively.
 
 {% capture tpackage_code %}k config use-context av-wkld-admin@av-wkld
 t package repository add tanzu-standard \
- --url harbor.deephackmode.io/tkg/packages/standard/repo:v2024.8.21 \
- --namespace tkg-system"
+  --url harbor.deephackmode.io/tkg/packages/standard/repo:v2024.8.21 \
+  --namespace tkg-system"
 {% endcapture %}
 {% include codeblock.html code=tpackage_code %}
 
@@ -37,7 +37,7 @@ ubuntu@numbat:~$
 
 The cert-manager workload will be installed to manage the certificates used in TMC-SM.
 
-Set some environment variables that will be used for the cert-manager installation
+Set some environment variables that will be used for the cert-manager installation.
 
 {% capture setenvars_code %}export PACKAGE_USER_DEFINED_NAME="cert-manager"
 export TANZU_PACKAGE_NAME="cert-manager.tanzu.vmware.com"
@@ -67,7 +67,7 @@ EOF
 
 Install the cert-manager package.
 
-{% capture certmanagerinstall_code %}tanzu package install "${PACKAGE_USER_DEFINED_NAME}" \
+{% capture certmanagerinstall_code %}t package install "${PACKAGE_USER_DEFINED_NAME}" \
   --package "${TANZU_PACKAGE_NAME}" \
   --version "${TANZU_PACKAGE_VERSION}" \
   --values-file "${TANZU_PACKAGE_VALUES_FILE}" \
@@ -119,19 +119,19 @@ EOF
 
 Create the cluster-issuer resource.
 
-{% capture createclusterissuer_code %}kubectl apply -f tmcsm-cluster-issuer.yaml
+{% capture createclusterissuer_code %}k apply -f tmcsm-cluster-issuer.yaml
 {% endcapture %}
 {% include codeblock.html code=createclusterissuer_code %}
 
 Retrieve the self-signed cert (cluster-issuer) PEM data and save it in a file.  This file will contain the CA's that we want the cluster nodes to trust.  These CA certs will be added to the TMC-SM data values YAML file that will be created in an upcoming step.
 
-{% capture getsecret_code %}kubectl get secret -n cert-manager tmcsm-issuer \
- -o=jsonpath="{.data.ca\.crt}" \
- | base64 -d > $HOME/trusted-ca.pem
+{% capture getsecret_code %}k get secret -n cert-manager tmcsm-issuer \
+  -o=jsonpath="{.data.ca\.crt}" \
+  | base64 -d > $HOME/trusted-ca.pem
 {% endcapture %}
 {% include codeblock.html code=getsecret_code %}
 
-Also need to include the issuer of the Private Harbor server cert.  In this case, [that cert has been added](http://127.0.0.1:4000/deephackmode.io/update/2025/05/13/creating-management-cluster.html#set-up-the-docker-env){:target="_blank"} in `/usr/local/share/ca-certificates/opsman-ca.crt` earlier. 
+Also need to include the issuer of the Private Harbor server cert.  In this case, [that cert has been added](https://deephackmode.io/deephackmode.io/update/2025/05/14/creating-management-cluster.html#set-up-the-docker-env){:target="_blank"} in `/usr/local/share/ca-certificates/opsman-ca.crt` earlier. 
 
 {% capture getopsmancert_code %}cat /usr/local/share/ca-certificates/opsman-ca.crt >> ~/trusted-ca.pem
 {% endcapture %}
@@ -172,28 +172,7 @@ ldap:
     groupSearchFilter: "(&(objectClass=groupOfNames)(member={}))"
     rootCA: |
       -----BEGIN CERTIFICATE-----
-      MIIEFTCCAv2gAwIBAgIUZGBjrHqE6+CI/TzWz2sBdh6deZEwDQYJKoZIhvcNAQEL
-      BQAwgYsxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQH
-      DA1TYW4gRnJhbmNpc2NvMRowGAYDVQQKDBFEZWVwIEhhY2ttb2RlIEluYzEUMBIG
-      A1UECwwLRW5naW5lZXJpbmcxHTAbBgNVBAMMFGxkYXAuZGVlcGhhY2ttb2RlLmlv
-      MB4XDTI1MDYwMTE4NDg0MloXDTI2MDYwMTE4NDg0MlowgYsxCzAJBgNVBAYTAlVT
-      MRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQHDA1TYW4gRnJhbmNpc2NvMRow
-      GAYDVQQKDBFEZWVwIEhhY2ttb2RlIEluYzEUMBIGA1UECwwLRW5naW5lZXJpbmcx
-      HTAbBgNVBAMMFGxkYXAuZGVlcGhhY2ttb2RlLmlvMIIBIjANBgkqhkiG9w0BAQEF
-      AAOCAQ8AMIIBCgKCAQEAoX0/oDhgjvSEC5QeeclWPGFWOSYjK9Nw7zyOuJ2Ue+hr
-      fEs1rVDovErJZl0TSRTzmRlROAtw5CgINPD0htYPSc2LHBiL2/XLRfBzgSTFwBmw
-      6O8OwT8ViDmeu6nP9t1xNXIs3bcwcywOtTS+9RUInkkR9JXZnC7SxjcOS535RKsd
-      K4PYmKwJE2k2E1G/4MKeKYTR1zW/6AxluV7LAxj8sJjfuLdFeDNh+qm3Q1ylcwHF
-      qb/T30spdU7+dQInd4oB+vvgnSKIqwQcfdvpIoCVGUK1OMod3yE9LcCzeXvc6u8C
-      brkzZfZ5ObS1eAbYy5h5ql4PLtUGzHIhpRXTbj+lAQIDAQABo28wbTAfBgNVHREE
-      GDAWghRsZGFwLmRlZXBoYWNrbW9kZS5pbzAJBgNVHRMEAjAAMAsGA1UdDwQEAwIF
-      oDATBgNVHSUEDDAKBggrBgEFBQcDATAdBgNVHQ4EFgQUEVkMaia9zkgvvqruuhe1
-      vvNGzvkwDQYJKoZIhvcNAQELBQADggEBAJxG396p4bemfj3nDIG8ZAhSIFNPufdd
-      6izg9yus7VKWImI/aCZizkYzJBEb2w+J2ZgHciPI8+UWPGI/Rs0yh60Gmb21Kfo3
-      tf83Nk4Xi6WncPvrWoENHmMI8cF1bwqLOveEHQ4PefUHil0mRvRm//5HXYBBXkhk
-      QHRb/mcf5yds6Yrt1v1tM8DespzipYazcF0cSln8BZLOCoGHbLSkQRf24W6ooaTV
-      qqDUljP1G2lksgjxyU7tsH0E1noJnXTvDPmv/DVWLispc6HwPy9+pRNA48aqQbWJ
-      ObqgRFoGu4r8pTWRG5o/CI+Npv5Nsv7qZ9LiUrlNxjVzlReHV4JGEGU=
+      xxx
       -----END CERTIFICATE-----
 postgres:
   userPassword: "Admin!23"
@@ -205,50 +184,15 @@ telemetry:
 trustedCAs:
   trusted-ca.pem: |-
     -----BEGIN CERTIFICATE-----
-    MIIC7DCCAdSgAwIBAgIQXB7ak1h7KzrTn1EVGOS60TANBgkqhkiG9w0BAQsFADAQ
-    MQ4wDAYDVQQDEwV0bWNzbTAeFw0yNTA2MDExNDM2MjNaFw0yNTA4MzAxNDM2MjNa
-    MBAxDjAMBgNVBAMTBXRtY3NtMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
-    AQEAxAfMZLctyYSqjrxb95D8ar9iWSFV6sylZQpZvR9AuEr2v8xgA0ztmDYhvLnq
-    FGrtuIc1e3+wMk4ZHVdkI+20EsE+h3Ymz3n8t0vBBaaFUD1cILQ62cCjqwjGDWFY
-    yvoFOePskWf/RpVhylv2TTTSPBs/clFpLwO0Fs0cD2pxqgHTabSpxWujvgqYFsTJ
-    epvA1lBz9y1rFwyw1d/4BqEZb1koKhfkwqBFjWoFaksrselV3IxxQ3Nh1qoX4foP
-    Rotk2kCGvWA8xOQfH4lpmUPnLS9Wuz/I38ZlO8GvAmcTygWe8BKZdIOpvk0QSdlc
-    F3aXFx95A8LM1uJ8D0qfBewg/QIDAQABo0IwQDAOBgNVHQ8BAf8EBAMCAqQwDwYD
-    VR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUbBdkx1kTmvtfWgO6DFJ/SoM3xD8wDQYJ
-    KoZIhvcNAQELBQADggEBADKlQyNIzz0JjcpFTp2er+aw8dQ+LhkkHpx0TCgCSCA8
-    bvALZ5LSflo0dUmwgy7GGppw50spiSfEHx189+Va+1OAEJqtRplO+WX/3sijsJLn
-    PmOk7xM6asYh83067OKvbNQGcMoA0HswOiF1CWKMoTeiVW00+t42EjxsYYBX6Rov
-    vn06aTdyAKZuIAu3abWTchssQ4+8nE1/T56o9U7fS2Jd/79qdskHi+OGBTweFHhU
-    uTgCqYFjcDXdPArLjQTguZl4/HjdnMo2f1Nacm0x5ypw8ikpaXN5ANgOW302qYZI
-    dgUod7HpQ36+eihcuQEbD6sjReMAiMd3xnGifgT2u0U=
-    -----END CERTIFICATE-----
-    -----BEGIN CERTIFICATE-----
-    MIIDUDCCAjigAwIBAgIULOZPbDD4cjaev999fD5CDO8vyy4wDQYJKoZIhvcNAQEL
-    BQAwHzELMAkGA1UEBhMCVVMxEDAOBgNVBAoMB1Bpdm90YWwwHhcNMjUwNDA5MDA0
-    MjUyWhcNMjkwNDA5MDA0MjUyWjAfMQswCQYDVQQGEwJVUzEQMA4GA1UECgwHUGl2
-    b3RhbDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMM2LDuVDtmBOKXa
-    tS0dC898Zi5ANXVo6+iplVo0un1HRPtEJIQD+i7GwD3LgrUFSVk+95FnK1Q/sH5n
-    f22YByrSnAgAyMNU2ePNwFpMI13wMEgXkn98PiNUJleL/h3+ZlOCktLskEXHM+lv
-    hKCRg4O3JEVM9AqAmIfhJGSs832VzBtcJfRQ4WGsluD3u2DCly8UNo4yYfZMfW+y
-    h086ma7b4Bi68QosvrcIm/TMj1pi51zn2uExmgAWlXORDuaLRpFa2qJTLJaGj743
-    MlQAy7ozuma0MFQ2C2h0E8HJokjKsRZGUVn/Ha09Ys4Oj8H+QUAgC625t8RxW083
-    N4ILwH0CAwEAAaOBgzCBgDAdBgNVHQ4EFgQUE/izKiTagXr9a3l2MfSpqWkz2gIw
-    HwYDVR0jBBgwFoAUE/izKiTagXr9a3l2MfSpqWkz2gIwHQYDVR0lBBYwFAYIKwYB
-    BQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgEG
-    MA0GCSqGSIb3DQEBCwUAA4IBAQCh28ZuiWlG0wzl908zGaM9B4J3SMxdKYXDRlWr
-    CQe/m7qq1s7S/VoO3dXRSY4JDrbksB1mBbqHtXwMaA8NvaKEmgjwdoEzHO+zhDsr
-    /fusAuEGPZ9AGqvKpItki06m1tyqC0PS+/wBXC5yfUm1SGiGZgpeRbh5gL4o+LTP
-    TKuygzCZwpPaZSeF3D2ePmom/OnojisEIf4e7vR6bfNUyo0PBzGfz2z/GuUf0MO8
-    s7yIUpHm1o9YVnozihCRbpQLJTCDClvQDpZksW6RIf6ZpcnWHxo6n29YZxm66ScC
-    xM+j+j+RUPE2+I1LeRhuDUWcxpCe/l/o6zlo1IRatsuDmDDF
+    xxx
     -----END CERTIFICATE-----
 EOF
 {% endcapture %}
 {% include codeblock.html code=tmcsmdv_code %}
 
-Make sure that the certificates are updated.  The `.ldap.rootCA` should have the PEM data from the `ldap.deephackmode.io.crt` file.  The `trustedCAs.trusted-ca.pem` should have the contents for `$HOME/trusted-ca.pem`.
+Make sure that the certificates are updated.  The `.ldap.rootCA` should have the PEM data from the `ldap.deephackmode.io.crt` file.  The `trustedCAs.trusted-ca.pem` should have the contents for `$HOME/trusted-ca.pem`.  See the following step on how to use `yq` cli to easily set the certificates in the YAML file.
 
-#### Use yq to make adding/changing certs in the YAML easier
+#### Use yq to add or update values in the YAML a lot easier
 
 You can install `yq` as below:
 
@@ -260,13 +204,20 @@ sudo install yq_linux_amd64 /usr/local/bin/yq
 
 Then, use `yq` to replace the value of `.trustedCAs.trusted-ca.pem` in the `tmcsm-values.yaml` file with the contents of `$HOME/trusted-ca.pem`.
 
-
-{% capture useyq_code %}TRUSTED_CERT="$(cat $HOME/trusted-ca.pem)" yq e \
- '.trustedCAs."trusted-ca.pem" = strenv(TRUSTED_CERT) \
- | .trustedCAs."trusted-ca.pem" style="literal"' \
- -i $HOME/tmcsm-values.yaml
+{% capture useyq_code %}TRUSTED_CERT="$(cat ./trusted-ca.pem)" yq e '.trustedCAs."trusted-ca.pem" = strenv(TRUSTED_CERT) | .trustedCAs."trusted-ca.pem" style="literal"' -i ./tmcsm-values.yaml
 {% endcapture %}
 {% include codeblock.html code=useyq_code %}
+
+Do the same to replace the value of `.ldap.rootCA`.
+{% capture useyqldap_code %}LDAP_CERT="$(cat ./ldap.deephackmode.io.crt)" yq e '.ldap.rootCA = strenv(LDAP_CERT) | .ldap.rootCA style="literal"' -i ./tmcsm-values.yaml
+{% endcapture %}
+{% include codeblock.html code=useyqldap_code %}
+
+Check the contents of `tmcsm-values.yaml` and it should now have the certificates set in the right places.
+
+{% capture cat_values_code %}cat tmcsm-values.yaml
+{% endcapture %}
+{% include codeblock.html code=cat_values_code %}
 
 ### Download the tmc-sm bundle from the Broadcom Support Portal.
 
@@ -309,7 +260,7 @@ In the jumpbox, login to the private registry.
 {% endcapture %}
 {% include codeblock.html code=dockerlogin_code %}
 
-Change directory to the parent directory of the `tanzumc` directory that was create earlier.
+Change directory to the parent directory of the `tanzumc` directory that was created earlier.
 
 {% capture cd_code %}cd /mnt/tmp/ubuntu
 {% endcapture %}
@@ -326,13 +277,13 @@ ubuntu@numbat:/mnt/tmp/ubuntu$
 Push the TMC-SM images to the registry.
 
 {% capture push_code %}tanzumc/tmc-sm push-images harbor \
- --project harbor.deephackmode.io/tmc-sm-automation \
- --username admin \
- --password 'pa$$w0rd'
+  --project harbor.deephackmode.io/tmc-sm-automation \
+  --username admin \
+  --password 'pa$$w0rd'
 {% endcapture %}
 {% include codeblock.html code=push_code %}
 
-After it completes, the below output should be shown.
+After it completes, the below output could be seen.
 
 ```
 ...
@@ -369,7 +320,7 @@ Let's create the namespace where the tmc-sm workload app will live.
 
 Run the command to add the TMC-SM package repo to the cluster.
 
-{% capture tmcsmpkgr_code %}tanzu package repository add tanzu-mission-control-packages \
+{% capture tmcsmpkgr_code %}t package repository add tanzu-mission-control-packages \
   --url "harbor.deephackmode.io/tmc-sm-automation/package-repository:1.4.1"\
   --namespace tmc-local
 {% endcapture %}
@@ -378,7 +329,7 @@ Run the command to add the TMC-SM package repo to the cluster.
 ### Install the TMC-SM Package
 
 Run the command to install the TMC-SM v1.4.1 package.
-{% capture tmcsmpkginstall_code %}tanzu package install tanzu-mission-control \
+{% capture tmcsmpkginstall_code %}t package install tanzu-mission-control \
   -p tmc.tanzu.vmware.com \
   --version "1.4.1" \
   --values-file tmcsm-values.yaml \
@@ -387,7 +338,7 @@ Run the command to install the TMC-SM v1.4.1 package.
 {% include codeblock.html code=tmcsmpkginstall_code %}
 
 
-### Verify if installation was successful
+### Verify if the installation was successful
 
 Check if the packages are all reconciled successfully.
 ```
@@ -423,7 +374,7 @@ ubuntu@numbat:~$ t package installed list -A
 ubuntu@numbat:~$
 ```
 
-Check if all pods are running fine or completed successfully.
+Check if all the pods are running fine or completed successfully.
 ```
 ubuntu@numbat:~$ k -n tmc-local get po
 NAME                                                 READY   STATUS      RESTARTS      AGE
@@ -520,7 +471,7 @@ wcm-server-84b7dd6f46-zmmml                          1/1     Running     0      
 ubuntu@numbat:~$
 ```
 
-Check the services.  One of them is `contour-envoy` LoadBalancer and should have an ExternalIP.
+Check the services.  One of them is the `contour-envoy` LoadBalancer and should have an ExternalIP.
 
 ```
 ubuntu@numbat:~$ k get svc -n tmc-local
@@ -619,13 +570,14 @@ ubuntu@numbat:~$
 
 ### Add the DNS entries for TMC-SM components
 
-Find the service named contour and take not of the ExternalIP of the LoadBalancer.
+Note the service named `contour-envoy` and its ExternalIP.
 
 ```
-contour-envoy                                      LoadBalancer   100.71.214.251   192.168.86.201   80:32218/TCP,443:32526/TCP   
+NAME              TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)
+contour-envoy     LoadBalancer   100.71.214.251   192.168.86.201   80:32218/TCP,443:32526/TCP   
 ```
 
-In my case, I'm using dnsmasq and I added the following A records pointing to the LoadBalancer ExternalIP.
+In my case, I'm using dnsmasq and so I added the following A records pointing to the `controu-envoy` service's LoadBalancer ExternalIP.
 ```
 host-record=tmc.deephackmode.io,192.168.86.201
 host-record=alertmanager.tmc.deephackmode.io,192.168.86.201
@@ -641,11 +593,13 @@ host-record=s3.tmc.deephackmode.io,192.168.86.201
 host-record=tmc-local.s3.tmc.deephackmode.io,192.168.86.201
 ```
 
+The need to add these A records are documented in the TMC documentation on "[Configure a DNS zone](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-mission-control/1-4/tanzu-mission-control-documentation/tanzumc-sm-install-config-prepare-cluster.html#:~:text=data%20at%20rest.-,Configure%20a%20DNS%20zone,-To%20ensure%20that){:target="_blank"}".
+
 Reload the DNS configuration, and make sure that the TMC host names are resolving to the IP address accordingly.
 
 ### Log in to the TMC-SM UI
 
-Go to https://tmc.deephackmode.io.  You should be greeted by this sign in page.
+Go to https://tmc.deephackmode.io.  You should be greeted by this "Sign In" page.
 
 <figure>
 <div class="image-row-big">
@@ -654,7 +608,7 @@ Go to https://tmc.deephackmode.io.  You should be greeted by this sign in page.
 <figcaption>TMC-SM UI Sign In</figcaption>
 </figure> 
 
-Click Sign In, and then you would be redirected to the Pinniped Login.
+Click the "Sign In" button, and then you should be redirected to the "Pinniped Login" page.
 
 <figure>
 <div class="image-row-big">
@@ -663,9 +617,9 @@ Click Sign In, and then you would be redirected to the Pinniped Login.
 <figcaption>Pinniped Login</figcaption>
 </figure> 
 
-Login with your LDAP Username and Password.  Review the post [Deploy a LDAP server workload](https://deephackmode.io/deephackmode.io/update/2025/06/07/deploy-a-ldap-server-workload.html){:target="_blank"}, to know what username and password that can be used.
+Log in with your LDAP Username and Password.  Review the post [Deploy a LDAP server workload](https://deephackmode.io/deephackmode.io/update/2025/06/07/deploy-a-ldap-server-workload.html){:target="_blank"}, to know what username and password that can be used.
 
-Once logged in, you should this screen.
+Once logged in, you should see this screen.
 
 <figure>
 <div class="image-row-big">
@@ -674,7 +628,7 @@ Once logged in, you should this screen.
 <figcaption>TMC-SM Logged In</figcaption>
 </figure> 
 
-Switch to Dark Mode.
+You could switch to Dark Mode.
 <figure>
 <div class="image-row-big">
 <img class="popup-img" src="/assets/images/2025-06-08-tanzu-mission-control-self-managed-installation/tmc-sm-dark-mode.png" alt="TMC-SM Dark Mode" title="TMC-SM Dark Mode">
@@ -682,7 +636,7 @@ Switch to Dark Mode.
 <figcaption>TMC-SM Dark Mode</figcaption>
 </figure> 
 
-The Clusters page is empty for now.
+The Clusters page would be empty for now, obviously.
 
 <figure>
 <div class="image-row-big">
@@ -691,7 +645,7 @@ The Clusters page is empty for now.
 <figcaption>Empty Clusters page</figcaption>
 </figure> 
 
-Let's attach our TKGI cluster.
+Let's attach my TKGI cluster.
 
 <figure>
 <div class="image-row-big">
@@ -703,7 +657,7 @@ Let's attach our TKGI cluster.
 <figcaption>Attach a TKGI Cluster</figcaption>
 </figure> 
 
-Our TKGI cluster has been attached successfully!  We can see our Openldap workload app there as well.
+My TKGI cluster has been attached successfully!  I could see our Openldap workload app there as well.
 
 <figure>
 <div class="image-row-big">
@@ -713,4 +667,4 @@ Our TKGI cluster has been attached successfully!  We can see our Openldap worklo
 <figcaption>TKGI Cluster and the Openldap workload</figcaption>
 </figure> 
 
-That concludes our task to install the VMware Tanzu Mission Control Self-Managed!
+That concludes my task to install the VMware Tanzu Mission Control Self-Managed!

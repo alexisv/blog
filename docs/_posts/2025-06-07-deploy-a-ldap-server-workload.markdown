@@ -227,6 +227,7 @@ EOF
 
 {% include codeblock.html code=yaml_code %}
 
+### Create the LDAP deployment
 Create the kubernetes resources from the YAML:
 {% include codeblock.html code="k -n openldap apply -f openldap.yaml" %}
 
@@ -266,7 +267,7 @@ run this container with '--loglevel debug'
 
 ```
 
-
+### Install and run the ldapsearch utility
 In the jumpbox "numbat", which I use to examine my TKGM clusters, install the ldap-utils package to make the `ldapsearch` cli available for use.
 
 {% include codeblock.html code="sudo apt update
@@ -302,8 +303,8 @@ result: 0 Success
 ubuntu@numbat:~$
 ```
 
-
-Create a LDIF file with example user and group records for our use case.  The password hardcoded in this LDIF are all the same, and it is the literal word `incorrect`.
+### Populate the LDAP directory
+Create a LDIF file with example user and group records for our use case.  The userPassword value that is hardcoded in this LDIF is the same in all the user records where it is added, and the password is the literal word `incorrect`.
 
 {% capture ldif_code %}
 cat > ldap.ldif <<EOF
@@ -393,6 +394,7 @@ EOF
 {% include codeblock.html code=ldif_code %}
 
 
+### A few ldapsearch examples
 Run `ldapsearch` with filter for a specific user record:
 
 ```
@@ -469,6 +471,80 @@ result: 0 Success
 ubuntu@numbat:~$
 ```
 
+
+### A few useful LDAP Operations
+
+#### Add users (from STDIN):
+```
+$ env LDAPTLS_CACERT=ldap.deephackmode.io.crt ldapadd -H 'ldaps://ldap.deephackmode.io' -D "cn=admin,dc=deephackmode,dc=io" -w admin
+dn: cn=ldapadmin,ou=users,dc=deephackmode,dc=io
+objectClass: simpleSecurityObject
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: ldapadmin
+sn: ldapadmin
+mail: ldapadmin@deephackmode.io
+description: ldapadmin
+userPassword:: e1NTSEF9RC9IZ2FDV2t6SG03alVxRVl1SmJ1QVRWNVBBdTV6NXM=
+uid: ldapadmin
+uidNumber: 1001
+gidNumber: 1001
+homeDirectory: /home/ldapadmin
+ 
+adding new entry "cn=ldapadmin,ou=users,dc=deephackmode,dc=io"
+ 
+dn: cn=ldapuser,ou=users,dc=deephackmode,dc=io
+objectClass: simpleSecurityObject
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: ldapuser
+sn: ldapuser
+mail: ldapuser@deephackmode.io
+description: ldapuser
+userPassword:: e1NTSEF9RC9IZ2FDV2t6SG03alVxRVl1SmJ1QVRWNVBBdTV6NXM=
+uid: ldapuser
+uidNumber: 1002
+gidNumber: 1002
+homeDirectory: /home/ldapuser
+ 
+adding new entry "cn=ldapuser,ou=users,dc=deephackmode,dc=io"
+ 
+$
+```
+#### Change password of a user
+```
+$ env LDAPTLS_CACERT=ldap.deephackmode.io.crt ldappasswd -H 'ldaps://ldap.deephackmode.io' -D "cn=admin,dc=deephackmode,dc=io" -w admin -S "cn=ldapuser,ou=users,dc=deephackmode,dc=io"
+New password:
+Re-enter new password:
+```
+
+#### Add a group (from STDIN):
+```
+$ env LDAPTLS_CACERT=ldap.deephackmode.io.crt ldapadd -H 'ldaps://ldap.deephackmode.io' -D "cn=admin,dc=deephackmode,dc=io" -w admin
+dn: cn=testgroup,ou=groups,dc=deephackmode,dc=io
+objectClass: groupOfNames
+objectClass: top
+cn: testgroup
+description: testgroup
+member: cn=alexisv,ou=users,dc=deephackmode,dc=io
+
+adding new entry "cn=testgroup,ou=groups,dc=deephackmode,dc=io"
+
+$
+```
+
+#### Add a user to a group (from STDIN):
+```
+$ env LDAPTLS_CACERT=ldap.deephackmode.io.crt ldapmodify -H 'ldaps://ldap.deephackmode.io' -D "cn=admin,dc=deephackmode,dc=io" -w admin
+dn: cn=testgroup,ou=groups,dc=deephackmode,dc=io
+changetype: modify
+add: member
+member: cn=testuser,ou=users,dc=deephackmode,dc=io
+
+modifying entry "cn=testgroup,ou=groups,dc=deephackmode,dc=io"
+
+$
+```
 
 At this point, the LDAP server now has the users and groups that I can use.  It also can communicate via TLS/SSL.  This should now be ready for the TMC-SM installation.
 
